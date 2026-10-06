@@ -6291,7 +6291,7 @@ html, body {
     position: absolute;
     z-index: 0;
     inset: 16% -15% 0 30%;
-    opacity: 0.4;
+    opacity: 0.58;
   }
 
   .shiny-hero__body {
@@ -6458,7 +6458,7 @@ html, body {
 
   .shiny-hero__visual {
     inset: 43% -58% 1% 15%;
-    opacity: 0.38;
+    opacity: 0.52;
   }
 
   .shiny-markets {
