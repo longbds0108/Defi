@@ -1769,7 +1769,7 @@ a.social-icon:hover {
 
 /* Chan cuon ngang toan trang - phong truong hop co phan tu decorative tran vien */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip; /* clip (not hidden) so it doesn't break position: sticky */
   max-width: 100vw;
 }
 

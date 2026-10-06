@@ -29,7 +29,101 @@
     .brand-lock__dark { display: none; }
     .landing-header--light .brand-lock__cream { display: none; }
     .landing-header--light .brand-lock__dark { display: block; }
-    .footer-logo { height: 51px; width: auto; display: block; margin-bottom: 14px; }
+    /* ---------- Professional footer ---------- */
+    .hg-footer { min-height: auto; padding: 0; }
+    .hg-footer__inner { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; padding: 60px 30px 30px; }
+    .hg-footer__main { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; }
+    .hg-footer__brand { max-width: 380px; }
+    .hg-footer__logo { height: 42px; width: auto; display: block; }
+    .hg-footer__desc { margin-top: 16px; color: #8d8691; font-size: 0.9rem; line-height: 1.6; }
+    .hg-footer__status { display: inline-flex; align-items: center; gap: 9px; margin-top: 18px; padding: 7px 13px; border: 1px solid var(--color-border); border-radius: 999px; color: #a79db5; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.03em; }
+    .hg-footer__status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-safe); box-shadow: 0 0 8px rgba(79, 209, 197, 0.6); }
+    .hg-footer__socials { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+    .hg-footer__col h4 { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #6f6878; margin: 4px 0 18px; }
+    .hg-footer__col a { display: block; width: fit-content; margin-bottom: 12px; color: #a79db5; font-size: 0.9rem; text-decoration: none; transition: color 0.16s ease, transform 0.16s ease; }
+    .hg-footer__col a:hover { color: #f4f2f7; transform: translateX(3px); }
+    .hg-footer__wordband { position: relative; max-width: 1320px; margin: 0 auto; height: clamp(84px, 9vw, 138px); overflow: hidden; }
+    .hg-footer .footer-ascii-field { position: absolute; inset: 0 30px; z-index: 0; opacity: 0.9; }
+    .hg-footer__wordmark {
+      position: absolute; z-index: 1; left: 30px; right: 30px; bottom: -0.14em; margin: 0;
+      text-align: center; font-family: var(--font-body); font-weight: 600;
+      font-size: clamp(3rem, 11vw, 9rem); line-height: 0.8; letter-spacing: -0.07em;
+      white-space: nowrap; pointer-events: none; user-select: none; -webkit-user-select: none;
+      background: linear-gradient(100deg, #565167 0%, #9a93ad 20%, #6a8ad4 38%, #cfe2ff 50%, #6a8ad4 62%, #9a93ad 80%, #565167 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: hg-wordmark-sheen 6.5s linear infinite;
+    }
+    @keyframes hg-wordmark-sheen { from { background-position: 0% 50%; } to { background-position: 200% 50%; } }
+    @media (prefers-reduced-motion: reduce) { .hg-footer__wordmark { animation: none; background-position: 50% 50%; } }
+    .hg-footer__bottombar { max-width: 1320px; margin: 0 auto; padding: 18px 30px 30px; display: flex; align-items: center; justify-content: space-between; gap: 14px 28px; flex-wrap: wrap; border-top: 1px solid var(--color-border); font-family: var(--font-mono); font-size: 0.68rem; color: #726c7a; }
+    .hg-footer__legal { display: flex; gap: 24px; }
+    .hg-footer__legal a { color: #8d8691; text-decoration: none; transition: color 0.16s ease; }
+    .hg-footer__legal a:hover { color: #f4f2f7; }
+    .hg-footer__warn { color: var(--color-warning); letter-spacing: 0.03em; }
+    @media (max-width: 980px) {
+      .hg-footer__main { grid-template-columns: repeat(3, 1fr); gap: 44px 28px; }
+      .hg-footer__brand { grid-column: 1 / -1; max-width: 560px; }
+    }
+    @media (max-width: 640px) {
+      .hg-footer__inner { padding: 64px 20px 30px; }
+      .hg-footer__main { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
+      .hg-footer__bottombar { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+    @media (max-width: 440px) {
+      .hg-footer__main { grid-template-columns: 1fr; }
+    }
+    /* Hero headline — animated diagonal sheen */
+    .shiny-hero h1 {
+      background: linear-gradient(105deg, #ffffff 0%, #efedf4 30%, #c3d6ff 46%, #83aaff 50%, #c3d6ff 54%, #efedf4 70%, #ffffff 100%);
+      background-size: 230% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: hero-headline-sheen 7.5s linear infinite;
+    }
+    @keyframes hero-headline-sheen { from { background-position: 0% 50%; } to { background-position: 230% 50%; } }
+    @media (prefers-reduced-motion: reduce) { .shiny-hero h1 { animation: none; background-position: 18% 50%; } }
+
+    /* ---------- Scroll-reveal for content sections (not hero / footer) ---------- */
+    @keyframes scroll-rise { from { opacity: 0; transform: translateY(44px); } to { opacity: 1; transform: none; } }
+    @supports (animation-timeline: view()) {
+      @media (prefers-reduced-motion: no-preference) {
+        #markets-section .shiny-markets__rail h2,
+        #markets-section .shiny-markets__rail p,
+        #protocol-section .shiny-principles__heading,
+        #protocol-section .shiny-principles__grid article,
+        #faq-section .shiny-faq__heading,
+        #faq-section .shiny-faq__item,
+        .shiny-cta__capital-map,
+        .shiny-cta > div:not(.shiny-cta__capital-map),
+        .shiny-cta__action {
+          animation: scroll-rise linear both;
+          animation-timeline: view();
+          animation-range: entry 8% entry 46%;
+        }
+      }
+    }
+
+    /* ---------- Markets: sticky stacking cards (card 2 rises over card 1) ---------- */
+    .shiny-markets__cards { gap: 52px; }
+    .shiny-markets__cards .shiny-market-card {
+      position: sticky;
+      box-shadow: 0 -26px 60px rgba(0, 0, 0, 0.55);
+    }
+    .shiny-markets__cards .shiny-market-card:nth-child(1) { top: 110px; }
+    .shiny-markets__cards .shiny-market-card:nth-child(2) { top: 134px; }
+    .shiny-markets__cards .shiny-market-card:nth-child(3) { top: 158px; }
+    .shiny-markets__cards .shiny-market-card:nth-child(3) {
+      background:
+        radial-gradient(circle at 78% 24%, rgba(149, 118, 234, 0.22), transparent 34%),
+        linear-gradient(150deg, #1c1830, #131117 62%);
+    }
+    @media (max-width: 760px) {
+      .shiny-markets__cards .shiny-market-card:nth-child(1) { top: 78px; }
+      .shiny-markets__cards .shiny-market-card:nth-child(2) { top: 94px; }
+      .shiny-markets__cards .shiny-market-card:nth-child(3) { top: 110px; }
+    }
   </style>
 </head>
 <body>
@@ -88,7 +182,7 @@
             <p>Vault parameters are read directly from the deployed Arc Testnet contract</p>
           </div>
           <div class="shiny-markets__cards">
-            <article class="shiny-market-card js-rise">
+            <article class="shiny-market-card">
               <div class="shiny-market-card__top">
                 <span class="shiny-market-card__index">01</span>
                 <span class="shiny-market-card__status"><i></i> ARC TESTNET</span>
@@ -107,7 +201,7 @@
               </div>
               <p class="shiny-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
             </article>
-            <article class="shiny-market-card js-rise c2">
+            <article class="shiny-market-card">
               <div class="shiny-market-card__top">
                 <span class="shiny-market-card__index">02</span>
                 <span class="shiny-market-card__status"><i></i> ARC TESTNET</span>
@@ -117,6 +211,25 @@
                 <div>
                   <h3>EURC</h3>
                   <p>Euro Coin</p>
+                </div>
+              </div>
+              <div class="shiny-market-card__rates">
+                <div><span>FLEXIBLE</span><strong>Revenue-based</strong></div>
+                <div><span>GROWTH / 6M</span><strong>Revenue-based</strong></div>
+                <div><span>DIAMOND / 12M</span><strong>Revenue-based</strong></div>
+              </div>
+              <p class="shiny-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
+            </article>
+            <article class="shiny-market-card">
+              <div class="shiny-market-card__top">
+                <span class="shiny-market-card__index">03</span>
+                <span class="shiny-market-card__status"><i></i> ARC TESTNET</span>
+              </div>
+              <div class="shiny-market-card__identity">
+                <img src="assets/cirbtc-logo.png" alt="" />
+                <div>
+                  <h3>cirBTC</h3>
+                  <p>Circle Bitcoin</p>
                 </div>
               </div>
               <div class="shiny-market-card__rates">
@@ -252,41 +365,73 @@
             </div>
           </section>
 
-          <footer id="footer-section" class="shiny-footer shiny-theme-dark" data-header-theme="dark">
-            <div class="shiny-footer__top">
-              <div>
-                <img class="footer-logo" src="assets/hedgora-logo.png" alt="Hedgora" />
-                <p>PRODUCTIVE STABLECOIN CAPITAL</p>
-                <button class="shiny-footer__documentary" type="button" id="docsLink2">
-                  <span>OPEN DOCUMENTARY</span>
-                  <span aria-hidden="true">↗</span>
-                </button>
-              </div>
-              <div class="shiny-footer__navigation">
-                <nav class="shiny-footer__docs" aria-label="Documentation links">
-                  <a href="https://docs.arc.io" target="_blank" rel="noreferrer">ARC DOCS ↗</a>
-                  <a href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">ARCSCAN ↗</a>
-                  <a href="https://github.com/qhoangRot/Shiny-dapp#readme" target="_blank" rel="noreferrer">GITHUB ↗</a>
-                </nav>
-                <div class="shiny-footer__socials" aria-label="Community links">
-                  <a class="shiny-footer__social-link" href="https://x.com/Hedgora_xyz" target="_blank" rel="noreferrer" aria-label="Hedgora on X">
-                    <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#x-icon" /></svg>
-                  </a>
-                  <button class="shiny-footer__social-link" type="button" aria-disabled="true" aria-label="Discord coming soon" aria-describedby="discord-coming-soon">
-                    <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#discord-icon" /></svg>
-                    <span id="discord-coming-soon" class="shiny-footer__social-tooltip" role="tooltip">COMING SOON</span>
-                  </button>
+          <footer id="footer-section" class="shiny-footer hg-footer shiny-theme-dark" data-header-theme="dark">
+            <div class="hg-footer__inner">
+              <div class="hg-footer__main">
+                <div class="hg-footer__brand">
+                  <img class="hg-footer__logo" src="assets/hedgora-logo.png" alt="Hedgora" />
+                  <p class="hg-footer__desc">Productive stablecoin capital. Stake USDC or EURC, earn funded testnet rewards, and borrow without putting your position to sleep.</p>
+                  <div class="hg-footer__status">
+                    <span class="hg-footer__status-dot"></span>All systems operational · Arc Testnet
+                  </div>
+                  <div class="hg-footer__socials" aria-label="Community links">
+                    <a class="shiny-footer__social-link" href="https://x.com/Hedgora_xyz" target="_blank" rel="noreferrer" aria-label="Hedgora on X">
+                      <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#x-icon" /></svg>
+                    </a>
+                    <a class="shiny-footer__social-link" href="https://github.com/longbds0108/Defi" target="_blank" rel="noreferrer" aria-label="Hedgora on GitHub">
+                      <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#github-icon" /></svg>
+                    </a>
+                    <button class="shiny-footer__social-link" type="button" aria-disabled="true" aria-label="Discord coming soon" aria-describedby="discord-coming-soon">
+                      <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#discord-icon" /></svg>
+                      <span id="discord-coming-soon" class="shiny-footer__social-tooltip" role="tooltip">COMING SOON</span>
+                    </button>
+                  </div>
                 </div>
+
+                <nav class="hg-footer__col" aria-label="Protocol">
+                  <h4>Protocol</h4>
+                  <a href="#markets-section">Markets</a>
+                  <a href="#" class="js-launch">Stake</a>
+                  <a href="#" class="js-launch">Borrow</a>
+                  <a href="#" class="js-launch">Positions</a>
+                  <a href="#" class="js-launch">Analytics</a>
+                </nav>
+
+                <nav class="hg-footer__col" aria-label="Developers">
+                  <h4>Developers</h4>
+                  <a href="https://github.com/longbds0108/Defi" target="_blank" rel="noreferrer">GitHub</a>
+                  <a href="#">Documentation</a>
+                  <a href="#">Smart contracts</a>
+                  <a href="#">Deployments</a>
+                  <a href="#">Bug bounty</a>
+                </nav>
+
+                <nav class="hg-footer__col" aria-label="Resources">
+                  <h4>Resources</h4>
+                  <a href="https://docs.arc.io" target="_blank" rel="noreferrer">Arc Docs ↗</a>
+                  <a href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Arcscan ↗</a>
+                  <a href="#faq-section">FAQ</a>
+                  <a href="#">Brand kit</a>
+                  <a href="#">Status</a>
+                </nav>
               </div>
             </div>
-            <div class="footer-ascii-field" role="button" tabindex="0" aria-label="Play a left-to-right color pulse across the ASCII capital wave">
-              <canvas id="footerCanvas" aria-hidden="true"></canvas>
+
+            <div class="hg-footer__wordband">
+              <div class="footer-ascii-field" role="button" tabindex="0" aria-label="Play a left-to-right color pulse across the ASCII capital wave">
+                <canvas id="footerCanvas" aria-hidden="true"></canvas>
+              </div>
+              <span class="hg-footer__wordmark" aria-hidden="true">HEDGORA</span>
             </div>
-            <div class="shiny-footer__wordmark" aria-hidden="true">HEDGORA</div>
-            <div class="shiny-footer__bottom">
-              <span>© 2026 HEDGORA</span>
-              <span>BUILT ON ARC TESTNET</span>
-              <span>TESTNET TOKENS HAVE NO VALUE</span>
+
+            <div class="hg-footer__bottombar">
+              <span class="hg-footer__copy">© 2026 Hedgora. All rights reserved.</span>
+              <div class="hg-footer__legal">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Risk disclosure</a>
+              </div>
+              <span class="hg-footer__warn">Testnet build · tokens have no value</span>
             </div>
           </footer>
         </div>
@@ -472,7 +617,7 @@
       curtain.classList.add('route-curtain--active');
       window.setTimeout(function () { curtain.classList.remove('route-curtain--active'); curtainBusy = false; }, reduce ? 500 : 1350);
     }
-    document.querySelectorAll('.js-launch').forEach(function (b) { b.addEventListener('click', launch); });
+    document.querySelectorAll('.js-launch').forEach(function (b) { b.addEventListener('click', function (e) { if (e.cancelable) e.preventDefault(); launch(); }); });
 
     /* =========================================================
        AsciiCoinField — ported verbatim from AsciiCoinField.tsx
@@ -718,13 +863,15 @@
         var pointerMoving = Math.abs(pointer.targetX - pointer.x) > 0.15 || Math.abs(pointer.targetY - pointer.y) > 0.15 || Math.abs(pointer.targetGlow - pointer.glow) > 0.005;
         var sweepProgress = 1;
         if (isSweeping) { sweepProgress = clamp((now - sweepStartedAt) / sweepDuration); if (sweepProgress >= 1) isSweeping = false; }
-        if (!needsRedraw && revealProgress >= 1 && !pointerMoving && !isSweeping) return;
+        if (reducedMotion && !needsRedraw && revealProgress >= 1 && !pointerMoving && !isSweeping) return;
         needsRedraw = false;
 
         context.clearRect(0, 0, width, height);
         context.font = Math.max(8, cellSize - 1) + 'px "JetBrains Mono", monospace';
         context.textAlign = 'center'; context.textBaseline = 'middle';
         var spotlightRadius = width < 680 ? 48 : 72;
+        var autoCenter = -999;
+        if (!reducedMotion) { autoCenter = 0.5 + 0.78 * Math.sin(now * 0.0031416); } // 2s period, smooth ping-pong
 
         for (var i = 0; i < cells.length; i++) {
           var cell = cells[i];
@@ -733,15 +880,21 @@
           var distanceToPointer = Math.hypot(cell.x - pointer.x, cell.y - pointer.y);
           var spotlight = Math.pow(clamp(1 - distanceToPointer / spotlightRadius), 4) * pointer.glow;
           var horizontalProgress = clamp(cell.x / Math.max(1, width));
-          var colorProgress = horizontalProgress, colorPulse = 0;
+          var autoPulse = 0;
+          if (!reducedMotion) {
+            var autoDist = Math.abs(horizontalProgress - autoCenter);
+            var autoRaw = clamp(1 - autoDist / 0.4);
+            autoPulse = autoRaw * autoRaw * (3 - 2 * autoRaw) * 0.5;
+          }
+          var colorPulse = autoPulse;
           if (isSweeping) {
             var sweepCenter = lerp(-0.24, 1.24, sweepProgress);
             var pulseDistance = Math.abs(horizontalProgress - sweepCenter);
             var pulse = clamp(1 - pulseDistance / 0.26);
-            colorPulse = pulse * pulse * (3 - 2 * pulse);
-            colorProgress = lerp(horizontalProgress, 1 - horizontalProgress, colorPulse);
+            colorPulse = Math.max(colorPulse, pulse * pulse * (3 - 2 * pulse));
           }
-          var visibleSpotlight = isSweeping ? spotlight * 0.12 : spotlight;
+          var colorProgress = lerp(horizontalProgress, 1 - horizontalProgress, colorPulse);
+          var visibleSpotlight = spotlight * (isSweeping ? 0.12 : 1) + autoPulse * 0.25;
           var red = Math.round(lerp(PURPLE[0], BLUE[0], colorProgress));
           var green = Math.round(lerp(PURPLE[1], BLUE[1], colorProgress));
           var blue = Math.round(lerp(PURPLE[2], BLUE[2], colorProgress));
