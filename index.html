@@ -86,26 +86,9 @@
     @keyframes hero-headline-sheen { from { background-position: 0% 50%; } to { background-position: 230% 50%; } }
     @media (prefers-reduced-motion: reduce) { .shiny-hero h1 { animation: none; background-position: 18% 50%; } }
 
-    /* ---------- Scroll-reveal for content sections (not hero / footer) ---------- */
-    @keyframes scroll-rise { from { opacity: 0; transform: translateY(44px); } to { opacity: 1; transform: none; } }
-    @supports (animation-timeline: view()) {
-      @media (prefers-reduced-motion: no-preference) {
-        #markets-section .shiny-markets__rail h2,
-        #markets-section .shiny-markets__rail p,
-        #protocol-section .hg-proto__head,
-        #protocol-section .hg-proto__card,
-        #protocol-section .hg-proto__infra,
-        #faq-section .shiny-faq__heading,
-        #faq-section .shiny-faq__item,
-        .shiny-cta__capital-map,
-        .shiny-cta > div:not(.shiny-cta__capital-map),
-        .shiny-cta__action {
-          animation: scroll-rise linear both;
-          animation-timeline: view();
-          animation-range: entry 8% entry 46%;
-        }
-      }
-    }
+    /* ---------- Scroll-reveal (IntersectionObserver — works on all browsers incl. Safari/iOS) ---------- */
+    .sr { opacity: 0; transform: translateY(40px); transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1); }
+    .sr.in { opacity: 1; transform: none; }
 
     /* ---------- Markets: sticky stacking cards (card 2 rises over card 1) ---------- */
     .shiny-markets__cards { gap: 52px; }
@@ -122,17 +105,10 @@
         linear-gradient(150deg, #1c1830, #131117 62%);
     }
     @media (max-width: 760px) {
-      /* Mobile: no sticky stacking — stack cards normally so there is no huge empty scroll */
-      .shiny-markets__cards { gap: 18px; }
-      .shiny-markets__cards .shiny-market-card { position: static; box-shadow: none; min-height: 430px; }
-    }
-    /* Mobile scroll effect for the market cards — IntersectionObserver based (works on all browsers incl. iOS Safari) */
-    @media (max-width: 760px) {
-      .shiny-markets__cards.mkt-reveal .shiny-market-card { opacity: 0; transform: translateY(40px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
-      .shiny-markets__cards.mkt-reveal .shiny-market-card.in { opacity: 1; transform: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .shiny-markets__cards.mkt-reveal .shiny-market-card { opacity: 1 !important; transform: none !important; transition: none !important; }
+      /* Keep the sticky stacking on mobile too (works on all browsers) */
+      .shiny-markets__cards .shiny-market-card:nth-child(1) { top: 78px; }
+      .shiny-markets__cards .shiny-market-card:nth-child(2) { top: 94px; }
+      .shiny-markets__cards .shiny-market-card:nth-child(3) { top: 110px; }
     }
 
     /* ---------- Principles — bento feature section ---------- */
@@ -559,17 +535,19 @@
       document.querySelectorAll('.js-rise').forEach(function (el) { el.classList.add('in'); });
     }
 
-    /* Market cards reveal on mobile (IntersectionObserver — works on iOS Safari) */
+    /* Scroll-reveal for content sections — IntersectionObserver (all browsers incl. Safari/iOS) */
     (function () {
-      var cont = document.querySelector('.shiny-markets__cards');
-      if (!cont) return;
-      var isMobile = window.matchMedia('(max-width: 760px)').matches;
-      if (!isMobile || reduce || !('IntersectionObserver' in window)) return;
-      cont.classList.add('mkt-reveal');
-      var mio = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); mio.unobserve(e.target); } });
-      }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
-      cont.querySelectorAll('.shiny-market-card').forEach(function (c) { mio.observe(c); });
+      if (reduce || !('IntersectionObserver' in window)) return;
+      var sel = '#markets-section .shiny-markets__rail h2, #markets-section .shiny-markets__rail p, '
+              + '#protocol-section .hg-proto__head, #protocol-section .hg-proto__card, #protocol-section .hg-proto__infra, '
+              + '#faq-section .shiny-faq__heading, #faq-section .shiny-faq__item, '
+              + '.shiny-cta__capital-map, .shiny-cta > div:not(.shiny-cta__capital-map), .shiny-cta__action';
+      var els = document.querySelectorAll(sel);
+      if (!els.length) return;
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { el.classList.add('sr'); io.observe(el); });
     })();
 
     /* ---------- Text scramble (ports TextScramble.tsx) ---------- */
