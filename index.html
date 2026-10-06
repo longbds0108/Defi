@@ -126,6 +126,16 @@
       .shiny-markets__cards { gap: 18px; }
       .shiny-markets__cards .shiny-market-card { position: static; box-shadow: none; min-height: 430px; }
     }
+    /* Mobile scroll effect for the market cards (fade + rise as each enters) */
+    @supports (animation-timeline: view()) {
+      @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+        .shiny-markets__cards .shiny-market-card {
+          animation: scroll-rise linear both;
+          animation-timeline: view();
+          animation-range: entry 6% entry 44%;
+        }
+      }
+    }
 
     /* ---------- Principles — bento feature section ---------- */
     .hg-proto { padding: 118px 30px 134px; }
