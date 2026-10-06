@@ -126,15 +126,13 @@
       .shiny-markets__cards { gap: 18px; }
       .shiny-markets__cards .shiny-market-card { position: static; box-shadow: none; min-height: 430px; }
     }
-    /* Mobile scroll effect for the market cards (fade + rise as each enters) */
-    @supports (animation-timeline: view()) {
-      @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
-        .shiny-markets__cards .shiny-market-card {
-          animation: scroll-rise linear both;
-          animation-timeline: view();
-          animation-range: entry 6% entry 44%;
-        }
-      }
+    /* Mobile scroll effect for the market cards — IntersectionObserver based (works on all browsers incl. iOS Safari) */
+    @media (max-width: 760px) {
+      .shiny-markets__cards.mkt-reveal .shiny-market-card { opacity: 0; transform: translateY(40px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+      .shiny-markets__cards.mkt-reveal .shiny-market-card.in { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .shiny-markets__cards.mkt-reveal .shiny-market-card { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
 
     /* ---------- Principles — bento feature section ---------- */
@@ -560,6 +558,19 @@
     } else {
       document.querySelectorAll('.js-rise').forEach(function (el) { el.classList.add('in'); });
     }
+
+    /* Market cards reveal on mobile (IntersectionObserver — works on iOS Safari) */
+    (function () {
+      var cont = document.querySelector('.shiny-markets__cards');
+      if (!cont) return;
+      var isMobile = window.matchMedia('(max-width: 760px)').matches;
+      if (!isMobile || reduce || !('IntersectionObserver' in window)) return;
+      cont.classList.add('mkt-reveal');
+      var mio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); mio.unobserve(e.target); } });
+      }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+      cont.querySelectorAll('.shiny-market-card').forEach(function (c) { mio.observe(c); });
+    })();
 
     /* ---------- Text scramble (ports TextScramble.tsx) ---------- */
     var GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$€#+*';
