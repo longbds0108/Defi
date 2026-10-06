@@ -91,8 +91,9 @@
       @media (prefers-reduced-motion: no-preference) {
         #markets-section .shiny-markets__rail h2,
         #markets-section .shiny-markets__rail p,
-        #protocol-section .shiny-principles__heading,
-        #protocol-section .shiny-principles__grid article,
+        #protocol-section .hg-proto__head,
+        #protocol-section .hg-proto__card,
+        #protocol-section .hg-proto__infra,
         #faq-section .shiny-faq__heading,
         #faq-section .shiny-faq__item,
         .shiny-cta__capital-map,
@@ -123,6 +124,71 @@
       .shiny-markets__cards .shiny-market-card:nth-child(1) { top: 78px; }
       .shiny-markets__cards .shiny-market-card:nth-child(2) { top: 94px; }
       .shiny-markets__cards .shiny-market-card:nth-child(3) { top: 110px; }
+    }
+
+    /* ---------- Principles — bento feature section ---------- */
+    .hg-proto { padding: 118px 30px 134px; }
+    .hg-proto__head { max-width: 1320px; margin: 0 auto 52px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 36px 64px; align-items: start; }
+    .hg-proto__kicker { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8594; }
+    .hg-proto__title { margin: 18px 0 30px; font-family: var(--font-body); font-weight: 400; font-size: clamp(2.6rem, 5vw, 5.4rem); line-height: 0.96; letter-spacing: -0.04em; color: #14121a; }
+    .hg-proto__cta { display: inline-flex; align-items: center; gap: 16px; padding: 10px 12px 10px 26px; background: #14121a; color: #fff; border-radius: 999px; font-family: var(--font-body); font-size: 0.98rem; text-decoration: none; transition: background 0.18s ease, transform 0.18s ease; }
+    .hg-proto__cta:hover { background: #000; transform: translateY(-2px); }
+    .hg-proto__cta-arrow { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #14121a; font-size: 1.05rem; }
+    .hg-proto__lead { font-family: var(--font-body); font-size: clamp(1.1rem, 1.5vw, 1.5rem); line-height: 1.42; color: #3b3742; max-width: 42ch; }
+    .hg-proto__grid { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 2.6fr 1fr 1fr; gap: 16px; }
+    .hg-proto__card { position: relative; overflow: hidden; min-height: 380px; padding: 30px; border-radius: 22px; display: flex; flex-direction: column; background: linear-gradient(158deg, #2a2142 0%, #171026 72%); color: #efeaf6; }
+    .hg-proto__card--feature {
+      color: #ffffff;
+      background:
+        linear-gradient(180deg, transparent 42%, rgba(8, 11, 26, 0.68) 100%),
+        linear-gradient(100deg, rgba(8, 11, 26, 0.92) 0%, rgba(8, 11, 26, 0.6) 32%, rgba(8, 11, 26, 0.22) 62%, transparent 86%),
+        url('assets/yield-visual.jpg');
+      background-size: cover;
+      background-position: 58% 30%;
+    }
+    .hg-proto__card--feature h3 { text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45); }
+    .hg-proto__card-top { display: flex; align-items: baseline; gap: 14px; }
+    .hg-proto__num { font-family: var(--font-mono); font-size: 0.72rem; color: rgba(255, 255, 255, 0.38); }
+    .hg-proto__card--feature .hg-proto__num { color: rgba(255, 255, 255, 0.6); }
+    .hg-proto__card h3 { font-family: var(--font-body); font-weight: 500; font-size: clamp(1.5rem, 2vw, 2.1rem); line-height: 1.04; letter-spacing: -0.02em; }
+    .hg-proto__card-desc { margin-top: auto; padding-top: 24px; max-width: 34ch; font-size: 0.94rem; line-height: 1.5; color: rgba(239, 234, 246, 0.72); }
+    /* Box 2 & 3: HEDGORA gradient (same colours + keyframes) as the card BACKGROUND, drawn on
+       a ::before so it animates independently of the card's scroll-reveal animation. White text. */
+    .hg-proto__card:not(.hg-proto__card--feature) { background: #2a2740; box-shadow: 0 12px 36px rgba(32, 30, 70, 0.16); }
+    .hg-proto__card:not(.hg-proto__card--feature)::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(100deg, #565167 0%, #9a93ad 20%, #6a8ad4 38%, #cfe2ff 50%, #6a8ad4 62%, #9a93ad 80%, #565167 100%);
+      background-size: 200% 100%;
+      animation: hg-wordmark-sheen 6.5s linear infinite;
+      pointer-events: none;
+    }
+    .hg-proto__card:not(.hg-proto__card--feature) > * { position: relative; z-index: 1; }
+    .hg-proto__card:not(.hg-proto__card--feature) h3,
+    .hg-proto__card:not(.hg-proto__card--feature) .hg-proto__card-desc {
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 0, 0, 0.35);
+    }
+    .hg-proto__card:not(.hg-proto__card--feature) .hg-proto__num { color: rgba(255, 255, 255, 0.85); }
+    @media (prefers-reduced-motion: reduce) { .hg-proto__card:not(.hg-proto__card--feature)::before { animation: none; background-position: 18% 50%; } }
+    .hg-proto__card--feature .hg-proto__card-desc { max-width: 30ch; color: rgba(255, 255, 255, 0.88); text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5); }
+    .hg-proto__coin { position: absolute; right: -24px; bottom: -26px; width: clamp(150px, 15vw, 220px); height: auto; filter: drop-shadow(0 22px 44px rgba(60, 40, 120, 0.35)); pointer-events: none; }
+    .hg-proto__infra { max-width: 1320px; margin: 58px auto 0; display: grid; grid-template-columns: 1fr 2fr; gap: 26px 50px; align-items: center; }
+    .hg-proto__infra-lead { font-family: var(--font-body); font-size: 1rem; line-height: 1.5; color: #4a4650; max-width: 24ch; }
+    .hg-proto__infra-items { display: flex; flex-wrap: wrap; gap: 16px 36px; align-items: center; }
+    .hg-proto__infra-items span { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; color: #9a94a3; }
+    @media (max-width: 980px) {
+      .hg-proto__head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
+      .hg-proto__grid { grid-template-columns: repeat(2, 1fr); }
+      .hg-proto__card--feature { grid-column: span 2; }
+      .hg-proto__infra { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hg-proto { padding: 84px 20px 96px; }
+      .hg-proto__grid { grid-template-columns: 1fr; }
+      .hg-proto__card, .hg-proto__card--feature { grid-column: auto; min-height: 240px; }
     }
   </style>
 </head>
@@ -243,42 +309,44 @@
         </section>
 
         <!-- ============ Principles ============ -->
-        <section id="protocol-section" class="shiny-principles shiny-theme-light" data-header-theme="light">
-          <div class="shiny-principles__heading">
-            <h2><span data-scramble>Built for capital that refuses to sit still</span></h2>
-            <p>// THE PROTOCOL</p>
+        <section id="protocol-section" class="shiny-principles hg-proto shiny-theme-light" data-header-theme="light">
+          <div class="hg-proto__head">
+            <div class="hg-proto__head-left">
+              <span class="hg-proto__kicker">// The protocol</span>
+              <h2 class="hg-proto__title"><span data-scramble>Built for capital that refuses to sit still</span></h2>
+              <a class="hg-proto__cta" href="#faq-section">Discover it <span class="hg-proto__cta-arrow" aria-hidden="true">→</span></a>
+            </div>
+            <p class="hg-proto__lead">Hedgora turns staking and borrowing into one honest surface — funded rewards, borrow-while-staked liquidity, and a Health Factor that shows risk as distance to danger, not a vague label.</p>
           </div>
-          <div class="shiny-principles__grid" id="principlesGrid">
-            <article>
-              <span>01</span>
-              <h3><span data-scramble data-hover>YIELD FIRST</span></h3>
-              <p>Funded reward programs flow back to stablecoin vault participants</p>
+
+          <div class="hg-proto__grid">
+            <article class="hg-proto__card hg-proto__card--feature">
+              <div class="hg-proto__card-top">
+                <span class="hg-proto__num">01</span>
+                <h3>Yield first</h3>
+              </div>
+              <p class="hg-proto__card-desc">Funded reward programs flow back to stablecoin vault participants.</p>
             </article>
-            <article>
-              <span>02</span>
-              <h3><span data-scramble data-hover>BORROW WHILE STAKING</span></h3>
-              <p>Access liquidity without forcing productive capital to stop</p>
+            <article class="hg-proto__card">
+              <div class="hg-proto__card-top"><span class="hg-proto__num">02</span><h3>Borrow while staking</h3></div>
+              <p class="hg-proto__card-desc">Access liquidity without forcing productive capital to stop.</p>
             </article>
-            <article>
-              <span>03</span>
-              <h3><span data-scramble data-hover>HEALTH FACTOR CLARITY</span></h3>
-              <p>Risk is shown as distance to danger, not a vague status label</p>
+            <article class="hg-proto__card">
+              <div class="hg-proto__card-top"><span class="hg-proto__num">03</span><h3>Health Factor clarity</h3></div>
+              <p class="hg-proto__card-desc">Risk is shown as distance to danger, not a vague status label.</p>
             </article>
-            <article>
-              <span>04</span>
-              <h3><span data-scramble data-hover>SAME-ASSET REWARDS</span></h3>
-              <p>Earn rewards in the asset you already understand and deposited</p>
-            </article>
-            <article>
-              <span>05</span>
-              <h3><span data-scramble data-hover>TRANSPARENT TESTNET FX</span></h3>
-              <p>The EUR/USD test feed is explicit, inspectable, and owner-updated</p>
-            </article>
-            <article>
-              <span>06</span>
-              <h3><span data-scramble data-hover>CREDIT THAT COMPOUNDS</span></h3>
-              <p>Healthy positions become a portable signal of repayment behavior</p>
-            </article>
+          </div>
+
+          <div class="hg-proto__infra">
+            <p class="hg-proto__infra-lead">Built to support seamless experiences across testnet networks</p>
+            <div class="hg-proto__infra-items" aria-hidden="true">
+              <span>ARC TESTNET</span>
+              <span>ORACLE FEED</span>
+              <span>STAKING VAULT</span>
+              <span>LENDING POOL</span>
+              <span>REVENUE ROUTER</span>
+              <span>INSURANCE FUND</span>
+            </div>
           </div>
         </section>
 
