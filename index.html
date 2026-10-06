@@ -77,13 +77,12 @@
     }
     /* Hero headline — animated diagonal sheen */
     .shiny-hero h1 {
-      background: linear-gradient(105deg, #ffffff 0%, #efedf4 30%, #c3d6ff 46%, #83aaff 50%, #c3d6ff 54%, #efedf4 70%, #ffffff 100%);
-      background-size: 230% 100%;
+      background: linear-gradient(100deg, #726c8c 0%, #938cb2 16%, #6f90db 34%, #ffffff 47%, #ffffff 53%, #6f90db 66%, #938cb2 84%, #726c8c 100%);
+      background-size: 200% 100%;
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent; color: transparent;
-      animation: hero-headline-sheen 7.5s linear infinite;
+      animation: hg-wordmark-sheen 3.2s linear infinite;
     }
-    @keyframes hero-headline-sheen { from { background-position: 0% 50%; } to { background-position: 230% 50%; } }
     @media (prefers-reduced-motion: reduce) { .shiny-hero h1 { animation: none; background-position: 18% 50%; } }
 
     /* ---------- Scroll-reveal (IntersectionObserver — works on all browsers incl. Safari/iOS) ---------- */
