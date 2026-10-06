@@ -23,12 +23,13 @@
       .js-rise, .shiny-market-card.js-rise { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     /* Brand lockup logo — adapts to dark/light header */
-    .brand-lock { display: inline-flex; align-items: center; height: 30px; }
-    .brand-lock img { height: 30px; width: auto; display: block; }
+    .brand-lock { display: inline-flex; align-items: center; height: 41px; }
+    .brand-lock img { height: 41px; width: auto; }
+    .brand-lock__cream { display: block; }
     .brand-lock__dark { display: none; }
     .landing-header--light .brand-lock__cream { display: none; }
     .landing-header--light .brand-lock__dark { display: block; }
-    .footer-logo { height: 36px; width: auto; display: block; margin-bottom: 14px; }
+    .footer-logo { height: 51px; width: auto; display: block; margin-bottom: 14px; }
   </style>
 </head>
 <body>
@@ -557,37 +558,35 @@
         context.font = Math.max(8, cellSize - 1) + 'px "JetBrains Mono", monospace';
         context.textAlign = 'center'; context.textBaseline = 'middle';
 
-        var coins = [
-          { cx: -0.1, cy: -0.03, rx: 0.33, ry: 0.43, color: [232, 227, 213] },
-          { cx: 0.19, cy: 0.08, rx: 0.29, ry: 0.38, color: [63, 145, 255] }
-        ];
+        // Single centered circle (equal radii = perfectly round), with a
+        // horizontal cream -> blue tint so it keeps the two-tone look.
+        var CREAM = [232, 227, 213], COIN_BLUE = [63, 145, 255];
+        var coin = { cx: 0, cy: 0, r: 0.45 };
 
         for (var i = 0; i < cells.length; i++) {
           var cell = cells[i];
-          var bestDepth = -1, selectedColor = null, selectedRadius = 0;
-          for (var c = 0; c < coins.length; c++) {
-            var coin = coins[c];
-            var localX = (cell.nx - coin.cx) / coin.rx;
-            var localY = (cell.ny - coin.cy) / coin.ry;
-            var radius = Math.sqrt(localX * localX + localY * localY);
-            if (radius <= 1) {
-              var depthC = Math.sqrt(1 - radius * radius);
-              if (depthC > bestDepth) { bestDepth = depthC; selectedColor = coin.color; selectedRadius = radius; }
-            }
-          }
-          if (!selectedColor && !cell.onOrbit) continue;
+          var localX = (cell.nx - coin.cx) / coin.r;
+          var localY = (cell.ny - coin.cy) / coin.r;
+          var radius = Math.sqrt(localX * localX + localY * localY);
+          var inside = radius <= 1;
+          var bestDepth = inside ? Math.sqrt(1 - radius * radius) : -1;
+          if (!inside && !cell.onOrbit) continue;
           var revealAlpha = Math.max(0, Math.min(1, (reveal * 1.45 - cell.revealDistance) * 4));
           if (revealAlpha <= 0) continue;
-          if (selectedColor && cell.noise > 0.79 + bestDepth * 0.18) continue;
+          if (inside && cell.noise > 0.79 + bestDepth * 0.18) continue;
           if (cell.onOrbit && cell.noise > 0.62) continue;
-          var depth = selectedColor ? bestDepth : 0.15;
+          var depth = inside ? bestDepth : 0.15;
           var parallaxX = pointer.x * depth * 18;
           var parallaxY = pointer.y * depth * 13;
-          var character = cell.onOrbit && !selectedColor ? '·' : cell.character;
-          var alpha = revealAlpha * (cell.onOrbit && !selectedColor ? 0.38 : 0.28 + depth * 0.72);
-          if (selectedColor) {
-            var edgeGlow = selectedRadius > 0.88 ? 1.18 : 1;
-            context.fillStyle = 'rgba(' + selectedColor[0] + ', ' + selectedColor[1] + ', ' + selectedColor[2] + ', ' + Math.min(1, alpha * edgeGlow) + ')';
+          var character = cell.onOrbit && !inside ? '·' : cell.character;
+          var alpha = revealAlpha * (cell.onOrbit && !inside ? 0.38 : 0.28 + depth * 0.72);
+          if (inside) {
+            var t = Math.max(0, Math.min(1, (localX + 1) / 2));
+            var rr = Math.round(CREAM[0] + (COIN_BLUE[0] - CREAM[0]) * t);
+            var gg = Math.round(CREAM[1] + (COIN_BLUE[1] - CREAM[1]) * t);
+            var bb = Math.round(CREAM[2] + (COIN_BLUE[2] - CREAM[2]) * t);
+            var edgeGlow = radius > 0.88 ? 1.18 : 1;
+            context.fillStyle = 'rgba(' + rr + ', ' + gg + ', ' + bb + ', ' + Math.min(1, alpha * edgeGlow) + ')';
           } else {
             context.fillStyle = 'rgba(232, 227, 213, ' + alpha + ')';
           }
