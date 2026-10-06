@@ -1,0 +1,7 @@
+# Build / tooling caches
+.vite/
+node_modules/
+dist/
+
+# OS
+.DS_Store
