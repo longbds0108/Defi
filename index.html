@@ -175,15 +175,21 @@
     @media (prefers-reduced-motion: reduce) { .hg-proto__card:not(.hg-proto__card--feature)::before { animation: none; background-position: 18% 50%; } }
     .hg-proto__card--feature .hg-proto__card-desc { max-width: 30ch; color: rgba(255, 255, 255, 0.88); text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5); }
     .hg-proto__coin { position: absolute; right: -24px; bottom: -26px; width: clamp(150px, 15vw, 220px); height: auto; filter: drop-shadow(0 22px 44px rgba(60, 40, 120, 0.35)); pointer-events: none; }
-    .hg-proto__infra { max-width: 1320px; margin: 58px auto 0; display: grid; grid-template-columns: 1fr 2fr; gap: 26px 50px; align-items: center; }
+    .hg-proto__infra { max-width: 1320px; margin: 58px auto 0; display: grid; grid-template-columns: auto 1fr; gap: 26px 56px; align-items: center; }
     .hg-proto__infra-lead { font-family: var(--font-body); font-size: 1rem; line-height: 1.5; color: #4a4650; max-width: 30ch; }
-    .hg-proto__infra-items { display: flex; flex-wrap: wrap; gap: 16px 36px; align-items: center; }
-    .hg-proto__infra-items span { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; color: #9a94a3; }
+    .hg-proto__infra-items { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }
+    .hg-proto__track { display: flex; align-items: center; width: max-content; animation: logo-marquee 55s linear infinite; }
+    .hg-proto__logo { height: 30px; width: auto; flex: none; margin-right: 54px; opacity: 0.6; }
+    .hg-proto__logo[src*="logo-base"] { height: 28px; }
+    .hg-proto__logo[src*="logo-zenith"] { height: 28px; }
+    @keyframes logo-marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @media (prefers-reduced-motion: reduce) { .hg-proto__track { animation: none; } }
     @media (max-width: 980px) {
       .hg-proto__head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
       .hg-proto__grid { grid-template-columns: repeat(2, 1fr); }
       .hg-proto__card--feature { grid-column: span 2; }
       .hg-proto__infra { grid-template-columns: 1fr; }
+      .hg-proto__infra-items { justify-content: flex-start; }
     }
     @media (max-width: 600px) {
       .hg-proto { padding: 84px 20px 96px; }
@@ -339,13 +345,23 @@
 
           <div class="hg-proto__infra">
             <p class="hg-proto__infra-lead">Built to support seamless experiences across testnet networks</p>
-            <div class="hg-proto__infra-items" aria-hidden="true">
-              <span>ARC TESTNET</span>
-              <span>ORACLE FEED</span>
-              <span>STAKING VAULT</span>
-              <span>LENDING POOL</span>
-              <span>REVENUE ROUTER</span>
-              <span>INSURANCE FUND</span>
+            <div class="hg-proto__infra-items">
+              <div class="hg-proto__track">
+                <img class="hg-proto__logo" src="assets/logo-base.png" alt="Base" />
+                <img class="hg-proto__logo" src="assets/logo-robinhood.png" alt="Robinhood" />
+                <img class="hg-proto__logo" src="assets/logo-portaldot.png" alt="PortalDot" />
+                <img class="hg-proto__logo" src="assets/logo-pyth.png" alt="Pyth" />
+                <img class="hg-proto__logo" src="assets/logo-ethsepolia.png" alt="Ethereum Sepolia" />
+                <img class="hg-proto__logo" src="assets/logo-zenith.png" alt="Zenith" />
+                <img class="hg-proto__logo" src="assets/logo-dogeos.png" alt="DogeOS" />
+                <img class="hg-proto__logo" src="assets/logo-base.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="assets/logo-robinhood.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="assets/logo-portaldot.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="assets/logo-pyth.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="assets/logo-ethsepolia.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="assets/logo-zenith.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="assets/logo-dogeos.png" alt="" aria-hidden="true" />
+              </div>
             </div>
           </div>
         </section>
