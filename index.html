@@ -29,6 +29,7 @@
     .brand-lock__dark { display: none; }
     .landing-header--light .brand-lock__cream { display: none; }
     .landing-header--light .brand-lock__dark { display: block; }
+    @media (max-width: 680px) { .brand-lock, .brand-lock img { height: 32px; } }
     /* ---------- Professional footer ---------- */
     .hg-footer { min-height: auto; padding: 0; }
     .hg-footer__inner { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; padding: 60px 30px 30px; }
@@ -121,9 +122,9 @@
         linear-gradient(150deg, #1c1830, #131117 62%);
     }
     @media (max-width: 760px) {
-      .shiny-markets__cards .shiny-market-card:nth-child(1) { top: 78px; }
-      .shiny-markets__cards .shiny-market-card:nth-child(2) { top: 94px; }
-      .shiny-markets__cards .shiny-market-card:nth-child(3) { top: 110px; }
+      /* Mobile: no sticky stacking — stack cards normally so there is no huge empty scroll */
+      .shiny-markets__cards { gap: 18px; }
+      .shiny-markets__cards .shiny-market-card { position: static; box-shadow: none; min-height: 430px; }
     }
 
     /* ---------- Principles — bento feature section ---------- */
