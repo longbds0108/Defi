@@ -16,11 +16,11 @@
     .js-rise.in { opacity: 1; transform: none; transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
     .js-rise.d1.in { transition-delay: .18s; }
     .js-rise.d2.in { transition-delay: .28s; }
-    .shiny-market-card.js-rise { opacity: 0; transform: translateY(48px); }
-    .shiny-market-card.js-rise.in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s ease; }
-    .shiny-market-card.js-rise.c2.in { transition-delay: .08s; }
+    .hg-market-card.js-rise { opacity: 0; transform: translateY(48px); }
+    .hg-market-card.js-rise.in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s ease; }
+    .hg-market-card.js-rise.c2.in { transition-delay: .08s; }
     @media (prefers-reduced-motion: reduce) {
-      .js-rise, .shiny-market-card.js-rise { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .js-rise, .hg-market-card.js-rise { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     /* Brand lockup logo — adapts to dark/light header */
     .brand-lock { display: inline-flex; align-items: center; height: 41px; }
@@ -31,10 +31,10 @@
     .landing-header--light .brand-lock__dark { display: block; }
     @media (max-width: 680px) { .brand-lock, .brand-lock img { height: 32px; } }
     /* Remove the ↗ arrow cell from the LAUNCH APP buttons */
-    .shiny-action { grid-template-columns: auto !important; }
-    .shiny-action__icon { display: none !important; }
+    .hg-action { grid-template-columns: auto !important; }
+    .hg-action__icon { display: none !important; }
     /* Polished LAUNCH APP button — pill, comfy padding, lift + glow on hover */
-    .shiny-action {
+    .hg-action {
       border-radius: 999px !important;
       min-height: 48px;
       font-weight: 600;
@@ -43,11 +43,11 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
       transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
     }
-    .shiny-action > span:first-child { padding: 0 30px; justify-content: center; }
-    .shiny-action:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(11, 83, 191, 0.32); }
-    .shiny-action:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14); }
-    .shiny-action--compact { min-height: 42px; font-size: 0.72rem; }
-    .shiny-action--compact > span:first-child { padding: 0 22px; }
+    .hg-action > span:first-child { padding: 0 30px; justify-content: center; }
+    .hg-action:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(11, 83, 191, 0.32); }
+    .hg-action:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14); }
+    .hg-action--compact { min-height: 42px; font-size: 0.72rem; }
+    .hg-action--compact > span:first-child { padding: 0 22px; }
 
     /* ---------- "Safe by design" section (redesigned CTA) ---------- */
     .hg-sec { display: block; min-height: auto; padding: 72px 30px 128px; text-align: left; }
@@ -118,21 +118,21 @@
     }
     @keyframes hg-bflow1 { from { background-position: 0% 50%; } to { background-position: 200% 50%; } }
 
-    .shiny-action,
+    .hg-action,
     .hg-proto__cta,
     .hg-footer__status,
-    .shiny-footer__social-link,
-    .shiny-market-card,
+    .hg-footer__social-link,
+    .hg-market-card,
     .hg-proto__card,
-    .shiny-faq__item { position: relative; }
+    .hg-faq__item { position: relative; }
 
-    .shiny-action::after,
+    .hg-action::after,
     .hg-proto__cta::after,
     .hg-footer__status::after,
-    .shiny-footer__social-link::after,
-    .shiny-market-card::after,
+    .hg-footer__social-link::after,
+    .hg-market-card::after,
     .hg-proto__card::after,
-    .shiny-faq__item::after {
+    .hg-faq__item::after {
       content: "";
       position: absolute;
       inset: 0;
@@ -149,28 +149,28 @@
       animation: hg-bflow1 7s linear infinite;
     }
     /* FAQ + Market boxes: red / yellow / green gradient border (keeps 200% size from above) */
-    .shiny-market-card::after,
-    .shiny-faq__item::after { background-image: var(--hg-ab-rgy); }
+    .hg-market-card::after,
+    .hg-faq__item::after { background-image: var(--hg-ab-rgy); }
     /* Stagger phases so neighbours don't pulse in lockstep */
-    .shiny-markets__cards .shiny-market-card:nth-child(2)::after { animation-delay: -1.4s; }
-    .shiny-markets__cards .shiny-market-card:nth-child(3)::after { animation-delay: -2.8s; }
+    .hg-markets__cards .hg-market-card:nth-child(2)::after { animation-delay: -1.4s; }
+    .hg-markets__cards .hg-market-card:nth-child(3)::after { animation-delay: -2.8s; }
     .hg-proto__grid .hg-proto__card:nth-child(2)::after { animation-delay: -1.4s; }
     .hg-proto__grid .hg-proto__card:nth-child(3)::after { animation-delay: -2.8s; }
-    .shiny-faq__item:nth-child(2)::after { animation-delay: -1s; }
-    .shiny-faq__item:nth-child(3)::after { animation-delay: -2s; }
-    .shiny-faq__item:nth-child(4)::after { animation-delay: -3s; }
-    .shiny-faq__item:nth-child(5)::after { animation-delay: -4s; }
+    .hg-faq__item:nth-child(2)::after { animation-delay: -1s; }
+    .hg-faq__item:nth-child(3)::after { animation-delay: -2s; }
+    .hg-faq__item:nth-child(4)::after { animation-delay: -3s; }
+    .hg-faq__item:nth-child(5)::after { animation-delay: -4s; }
     /* Faster flow on hover */
-    .shiny-action:hover::after,
+    .hg-action:hover::after,
     .hg-proto__cta:hover::after,
-    .shiny-footer__social-link:hover::after,
-    .shiny-market-card:hover::after,
+    .hg-footer__social-link:hover::after,
+    .hg-market-card:hover::after,
     .hg-proto__card:hover::after,
-    .shiny-faq__item:hover::after { animation-duration: 3s; }
+    .hg-faq__item:hover::after { animation-duration: 3s; }
     @media (prefers-reduced-motion: reduce) {
-      .shiny-action::after, .hg-proto__cta::after, .hg-footer__status::after,
-      .shiny-footer__social-link::after, .shiny-market-card::after,
-      .hg-proto__card::after, .shiny-faq__item::after { animation: none; background-position: 50% 50%; }
+      .hg-action::after, .hg-proto__cta::after, .hg-footer__status::after,
+      .hg-footer__social-link::after, .hg-market-card::after,
+      .hg-proto__card::after, .hg-faq__item::after { animation: none; background-position: 50% 50%; }
     }
     /* Animated gradient border for the step cards (same 4-colour gradient as the markets) */
     .hg-steps__card::after {
@@ -327,7 +327,7 @@
       .hg-footer__main { grid-template-columns: 1fr; }
     }
     /* Hero headline — animated diagonal sheen */
-    .shiny-hero h1 {
+    .hg-hero h1 {
       background: linear-gradient(105deg, #ffffff 0%, #efedf4 30%, #c3d6ff 46%, #83aaff 50%, #c3d6ff 54%, #efedf4 70%, #ffffff 100%);
       background-size: 230% 100%;
       -webkit-background-clip: text; background-clip: text;
@@ -335,31 +335,31 @@
       animation: hero-headline-sheen 7.5s linear infinite;
     }
     @keyframes hero-headline-sheen { from { background-position: 0% 50%; } to { background-position: 230% 50%; } }
-    @media (prefers-reduced-motion: reduce) { .shiny-hero h1 { animation: none; background-position: 18% 50%; } }
+    @media (prefers-reduced-motion: reduce) { .hg-hero h1 { animation: none; background-position: 18% 50%; } }
 
     /* ---------- Scroll-reveal (IntersectionObserver — works on all browsers incl. Safari/iOS) ---------- */
     .sr { opacity: 0; transform: translateY(40px); transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1); }
     .sr.in { opacity: 1; transform: none; }
 
     /* ---------- Markets: sticky stacking cards (card 2 rises over card 1) ---------- */
-    .shiny-markets__cards { gap: 52px; }
-    .shiny-markets__cards .shiny-market-card {
+    .hg-markets__cards { gap: 52px; }
+    .hg-markets__cards .hg-market-card {
       position: sticky;
       box-shadow: 0 -26px 60px rgba(0, 0, 0, 0.55);
     }
-    .shiny-markets__cards .shiny-market-card:nth-child(1) { top: 110px; }
-    .shiny-markets__cards .shiny-market-card:nth-child(2) { top: 134px; }
-    .shiny-markets__cards .shiny-market-card:nth-child(3) { top: 158px; }
-    .shiny-markets__cards .shiny-market-card:nth-child(3) {
+    .hg-markets__cards .hg-market-card:nth-child(1) { top: 110px; }
+    .hg-markets__cards .hg-market-card:nth-child(2) { top: 134px; }
+    .hg-markets__cards .hg-market-card:nth-child(3) { top: 158px; }
+    .hg-markets__cards .hg-market-card:nth-child(3) {
       background:
         radial-gradient(circle at 78% 24%, rgba(149, 118, 234, 0.22), transparent 34%),
         linear-gradient(150deg, #1c1830, #131117 62%);
     }
     @media (max-width: 760px) {
       /* Keep the sticky stacking on mobile too (works on all browsers) */
-      .shiny-markets__cards .shiny-market-card:nth-child(1) { top: 78px; }
-      .shiny-markets__cards .shiny-market-card:nth-child(2) { top: 94px; }
-      .shiny-markets__cards .shiny-market-card:nth-child(3) { top: 110px; }
+      .hg-markets__cards .hg-market-card:nth-child(1) { top: 78px; }
+      .hg-markets__cards .hg-market-card:nth-child(2) { top: 94px; }
+      .hg-markets__cards .hg-market-card:nth-child(3) { top: 110px; }
     }
 
     /* ---------- Principles — bento feature section ---------- */
@@ -454,29 +454,29 @@
       </nav>
 
       <div class="app-header__right">
-        <button type="button" class="shiny-action shiny-action--compact js-launch">
+        <button type="button" class="hg-action hg-action--compact js-launch">
           <span>LAUNCH APP</span>
-          <span class="shiny-action__icon" aria-hidden="true">↗</span>
+          <span class="hg-action__icon" aria-hidden="true">↗</span>
         </button>
       </div>
     </header>
 
     <main class="app-main">
-      <div class="shiny-page">
+      <div class="hg-page">
         <!-- ============ Hero ============ -->
-        <section class="shiny-hero shiny-theme-dark" data-header-theme="dark">
-          <div class="shiny-hero__copy">
-            <p class="shiny-kicker">FUNDED TESTNET REWARDS · ARC TESTNET</p>
+        <section class="hg-hero hg-theme-dark" data-header-theme="dark">
+          <div class="hg-hero__copy">
+            <p class="hg-kicker">FUNDED TESTNET REWARDS · ARC TESTNET</p>
             <h1 class="js-rise">Your capital<br />should keep<br />moving</h1>
-            <p class="shiny-hero__body js-rise d1">Stake USDC or EURC, earn funded testnet rewards, and borrow without putting your position to sleep</p>
-            <div class="shiny-hero__actions js-rise d2">
-              <button type="button" class="shiny-action js-launch">
+            <p class="hg-hero__body js-rise d1">Stake USDC or EURC, earn funded testnet rewards, and borrow without putting your position to sleep</p>
+            <div class="hg-hero__actions js-rise d2">
+              <button type="button" class="hg-action js-launch">
                 <span>LAUNCH APP</span>
-                <span class="shiny-action__icon" aria-hidden="true">↗</span>
+                <span class="hg-action__icon" aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
-          <div class="shiny-hero__visual">
+          <div class="hg-hero__visual">
             <div class="ascii-coin-field" role="img" aria-label="An interactive field of characters forming two overlapping stablecoins">
               <canvas id="coinCanvas" aria-hidden="true"></canvas>
             </div>
@@ -484,74 +484,74 @@
         </section>
 
         <!-- ============ Markets ============ -->
-        <section id="markets-section" class="shiny-markets shiny-theme-dark" data-header-theme="dark">
-          <div class="shiny-markets__rail">
+        <section id="markets-section" class="hg-markets hg-theme-dark" data-header-theme="dark">
+          <div class="hg-markets__rail">
             <h2>Two markets<br />One productive<br />balance</h2>
             <p>Vault parameters are read directly from the deployed Arc Testnet contract</p>
           </div>
-          <div class="shiny-markets__cards">
-            <article class="shiny-market-card">
-              <div class="shiny-market-card__top">
-                <span class="shiny-market-card__index">01</span>
-                <span class="shiny-market-card__status"><i></i> ARC TESTNET</span>
+          <div class="hg-markets__cards">
+            <article class="hg-market-card">
+              <div class="hg-market-card__top">
+                <span class="hg-market-card__index">01</span>
+                <span class="hg-market-card__status"><i></i> ARC TESTNET</span>
               </div>
-              <div class="shiny-market-card__identity">
+              <div class="hg-market-card__identity">
                 <img src="assets/usdc-logo.png" alt="" />
                 <div>
                   <h3>USDC</h3>
                   <p>US Dollar Coin</p>
                 </div>
               </div>
-              <div class="shiny-market-card__rates">
+              <div class="hg-market-card__rates">
                 <div><span>FLEXIBLE</span><strong>Revenue-based</strong></div>
                 <div><span>GROWTH / 6M</span><strong>Revenue-based</strong></div>
                 <div><span>DIAMOND / 12M</span><strong>Revenue-based</strong></div>
               </div>
-              <p class="shiny-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
+              <p class="hg-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
             </article>
-            <article class="shiny-market-card">
-              <div class="shiny-market-card__top">
-                <span class="shiny-market-card__index">02</span>
-                <span class="shiny-market-card__status"><i></i> ARC TESTNET</span>
+            <article class="hg-market-card">
+              <div class="hg-market-card__top">
+                <span class="hg-market-card__index">02</span>
+                <span class="hg-market-card__status"><i></i> ARC TESTNET</span>
               </div>
-              <div class="shiny-market-card__identity">
+              <div class="hg-market-card__identity">
                 <img src="assets/eurc-logo.png" alt="" />
                 <div>
                   <h3>EURC</h3>
                   <p>Euro Coin</p>
                 </div>
               </div>
-              <div class="shiny-market-card__rates">
+              <div class="hg-market-card__rates">
                 <div><span>FLEXIBLE</span><strong>Revenue-based</strong></div>
                 <div><span>GROWTH / 6M</span><strong>Revenue-based</strong></div>
                 <div><span>DIAMOND / 12M</span><strong>Revenue-based</strong></div>
               </div>
-              <p class="shiny-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
+              <p class="hg-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
             </article>
-            <article class="shiny-market-card">
-              <div class="shiny-market-card__top">
-                <span class="shiny-market-card__index">03</span>
-                <span class="shiny-market-card__status"><i></i> ARC TESTNET</span>
+            <article class="hg-market-card">
+              <div class="hg-market-card__top">
+                <span class="hg-market-card__index">03</span>
+                <span class="hg-market-card__status"><i></i> ARC TESTNET</span>
               </div>
-              <div class="shiny-market-card__identity">
+              <div class="hg-market-card__identity">
                 <img src="assets/cirbtc-logo.png" alt="" />
                 <div>
                   <h3>cirBTC</h3>
                   <p>Circle Bitcoin</p>
                 </div>
               </div>
-              <div class="shiny-market-card__rates">
+              <div class="hg-market-card__rates">
                 <div><span>FLEXIBLE</span><strong>Revenue-based</strong></div>
                 <div><span>GROWTH / 6M</span><strong>Revenue-based</strong></div>
                 <div><span>DIAMOND / 12M</span><strong>Revenue-based</strong></div>
               </div>
-              <p class="shiny-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
+              <p class="hg-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
             </article>
           </div>
         </section>
 
         <!-- ============ Principles ============ -->
-        <section id="protocol-section" class="shiny-principles hg-proto shiny-theme-light" data-header-theme="light">
+        <section id="protocol-section" class="hg-principles hg-proto hg-theme-light" data-header-theme="light">
           <div class="hg-proto__head">
             <div class="hg-proto__head-left">
               <span class="hg-proto__kicker">// The protocol</span>
@@ -603,7 +603,7 @@
         </section>
 
         <!-- ============ How it works (stepper) ============ -->
-        <section id="faq-section" class="hg-steps shiny-theme-dark" data-header-theme="dark">
+        <section id="faq-section" class="hg-steps hg-theme-dark" data-header-theme="dark">
           <div class="hg-steps__head">
             <span class="hg-steps__kicker">// How it works</span>
             <h2 class="hg-steps__title">From deposit to borrow in four steps</h2>
@@ -666,8 +666,8 @@
         </section>
 
         <!-- ============ CTA + Footer ============ -->
-        <div class="shiny-footer-reveal">
-          <section class="shiny-cta hg-sec shiny-theme-light" data-header-theme="light">
+        <div class="hg-footer-reveal">
+          <section class="hg-cta hg-sec hg-theme-light" data-header-theme="light">
             <div class="hg-sec__panel">
               <div class="hg-sec__left">
                 <span class="hg-sec__badge" aria-hidden="true">
@@ -710,7 +710,7 @@
             </div>
           </section>
 
-          <footer id="footer-section" class="shiny-footer hg-footer shiny-theme-dark" data-header-theme="dark">
+          <footer id="footer-section" class="hg-footer hg-footer hg-theme-dark" data-header-theme="dark">
             <div class="hg-footer__inner">
               <div class="hg-footer__main">
                 <div class="hg-footer__brand">
@@ -720,15 +720,15 @@
                     <span class="hg-footer__status-dot"></span>All systems operational · Arc Testnet
                   </div>
                   <div class="hg-footer__socials" aria-label="Community links">
-                    <a class="shiny-footer__social-link" href="https://x.com/Hedgora_xyz" target="_blank" rel="noreferrer" aria-label="Hedgora on X">
-                      <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#x-icon" /></svg>
+                    <a class="hg-footer__social-link" href="https://x.com/Hedgora_xyz" target="_blank" rel="noreferrer" aria-label="Hedgora on X">
+                      <svg class="hg-footer__social-icon" aria-hidden="true"><use href="icons.svg#x-icon" /></svg>
                     </a>
-                    <a class="shiny-footer__social-link" href="https://github.com/longbds0108/Defi" target="_blank" rel="noreferrer" aria-label="Hedgora on GitHub">
-                      <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#github-icon" /></svg>
+                    <a class="hg-footer__social-link" href="https://github.com/longbds0108/Defi" target="_blank" rel="noreferrer" aria-label="Hedgora on GitHub">
+                      <svg class="hg-footer__social-icon" aria-hidden="true"><use href="icons.svg#github-icon" /></svg>
                     </a>
-                    <button class="shiny-footer__social-link" type="button" aria-disabled="true" aria-label="Discord coming soon" aria-describedby="discord-coming-soon">
-                      <svg class="shiny-footer__social-icon" aria-hidden="true"><use href="icons.svg#discord-icon" /></svg>
-                      <span id="discord-coming-soon" class="shiny-footer__social-tooltip" role="tooltip">COMING SOON</span>
+                    <button class="hg-footer__social-link" type="button" aria-disabled="true" aria-label="Discord coming soon" aria-describedby="discord-coming-soon">
+                      <svg class="hg-footer__social-icon" aria-hidden="true"><use href="icons.svg#discord-icon" /></svg>
+                      <span id="discord-coming-soon" class="hg-footer__social-tooltip" role="tooltip">COMING SOON</span>
                     </button>
                   </div>
                 </div>
@@ -799,14 +799,14 @@
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ---------- Hero / market entrance ---------- */
-    document.querySelectorAll('.shiny-hero .js-rise').forEach(function (el) {
+    document.querySelectorAll('.hg-hero .js-rise').forEach(function (el) {
       requestAnimationFrame(function () { el.classList.add('in'); });
     });
     if ('IntersectionObserver' in window) {
       var riseIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); riseIO.unobserve(e.target); } });
       }, { threshold: 0.2 });
-      document.querySelectorAll('.shiny-market-card.js-rise').forEach(function (el) { riseIO.observe(el); });
+      document.querySelectorAll('.hg-market-card.js-rise').forEach(function (el) { riseIO.observe(el); });
     } else {
       document.querySelectorAll('.js-rise').forEach(function (el) { el.classList.add('in'); });
     }
@@ -814,7 +814,7 @@
     /* Scroll-reveal for content sections — IntersectionObserver (all browsers incl. Safari/iOS) */
     (function () {
       if (reduce || !('IntersectionObserver' in window)) return;
-      var sel = '#markets-section .shiny-markets__rail h2, #markets-section .shiny-markets__rail p, '
+      var sel = '#markets-section .hg-markets__rail h2, #markets-section .hg-markets__rail p, '
               + '#protocol-section .hg-proto__head, #protocol-section .hg-proto__card, #protocol-section .hg-proto__infra, '
               + '#faq-section .hg-steps__head, #faq-section .hg-steps__card, '
               + '.hg-sec__left, .hg-sec__card';
@@ -891,12 +891,12 @@
     document.querySelectorAll('[data-scramble]').forEach(mountScramble);
 
     /* ---------- FAQ accordion ---------- */
-    document.querySelectorAll('.shiny-faq__item').forEach(function (item) {
+    document.querySelectorAll('.hg-faq__item').forEach(function (item) {
       var btn = item.querySelector('button');
       var sign = btn.querySelector('span[aria-hidden]');
       btn.addEventListener('click', function () {
         var open = !item.classList.contains('is-open');
-        document.querySelectorAll('.shiny-faq__item').forEach(function (other) {
+        document.querySelectorAll('.hg-faq__item').forEach(function (other) {
           other.classList.remove('is-open');
           var b = other.querySelector('button'); b.setAttribute('aria-expanded', 'false');
           var s = b.querySelector('span[aria-hidden]'); if (s) s.textContent = '+';
@@ -1280,14 +1280,14 @@
 
       if (typeof ResizeObserver !== 'undefined') new ResizeObserver(resize).observe(canvas);
       else window.addEventListener('resize', resize);
-      var revealTarget = canvas.closest('.shiny-footer-reveal') || canvas;
+      var revealTarget = canvas.closest('.hg-footer-reveal') || canvas;
       new IntersectionObserver(function (es) {
         isVisible = es[0].isIntersecting;
         if (isVisible && !hasRevealed) { hasRevealed = true; revealStartedAt = performance.now(); }
         if (isVisible) needsRedraw = true;
       }, { threshold: 0.08 }).observe(revealTarget);
 
-      var interactionTarget = canvas.closest('.shiny-footer') || canvas.parentElement;
+      var interactionTarget = canvas.closest('.hg-footer') || canvas.parentElement;
       var keyboardTarget = canvas.parentElement;
       window.addEventListener('pointermove', onPointerMove, { passive: true });
       document.documentElement.addEventListener('pointerleave', function () { pointer.targetGlow = 0; needsRedraw = true; });

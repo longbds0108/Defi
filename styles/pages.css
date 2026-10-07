@@ -364,7 +364,7 @@
   .page-intro { font-size: .82rem; }
 }
 
-/* Match the landing page's Shiny visual language across app surfaces. */
+/* Match the landing page's Hedgora visual language across app surfaces. */
 .app-shell--pages {
   --landing-ink: #111015;
   --landing-paper: #fff;
