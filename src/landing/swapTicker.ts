@@ -1,95 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swap — Hedgora</title>
-  <link rel="icon" href="../assets/hedgora-icon.png" type="image/png" />
-  <link rel="stylesheet" href="../styles/index.css" />
-  <link rel="stylesheet" href="../styles/App.css" />
-  <link rel="stylesheet" href="../styles/pages.css" />
-</head>
-<body>
-  <div class="app-shell app-shell--pages">
-    <header class="app-header pages-header">
-      <a class="app-header__left pages-brand" href="../index.html" aria-label="Hedgora home">
-        <img class="pages-brand__logo" src="../assets/hedgora-logo.png" alt="Hedgora" />
-      </a>
-      <div class="app-header__right"></div>
-    </header>
-    <div class="pages-layout">
-      <aside class="pages-sidebar" aria-label="Workspace">
-        <nav class="app-nav" aria-label="App navigation">
-        <a href="dashboard.html" data-page="dashboard">Dashboard</a>
-        <a href="swap.html" data-page="swap">Swap</a>
-        <a href="bridge.html" data-page="bridge">Bridge / Deposit / Withdraw</a>
-        <a href="pools.html" data-page="pools">Liquidity / Pools</a>
-        <a href="supply.html" data-page="supply">Lend / Supply</a>
-        <a href="borrow.html" data-page="borrow">Borrow</a>
-        <a href="vaults.html" data-page="vaults">Vaults / Strategies</a>
-        <a href="portfolio.html" data-page="portfolio">Portfolio / Positions</a>
-        </nav>
-      </aside>
-      <main class="app-main pages-main" aria-label="Swap">
-      <div class="swap-page">
-        <div class="swap-ticker" aria-label="Top 40 cryptocurrency markets by market capitalization">
-          <div class="swap-ticker__track" id="swapTickerTrack"></div>
-        </div>
-
-        <div class="swap-workspace">
-          <section class="swap-card" aria-labelledby="swap-title">
-            <div class="swap-card__top">
-              <div class="swap-mode" role="tablist" aria-label="Swap mode">
-                <button class="is-active" type="button" role="tab" aria-selected="true">Standard</button>
-                <button type="button" role="tab" aria-selected="false">Advanced</button>
-              </div>
-              <h1 id="swap-title" class="visually-hidden">Swap tokens</h1>
-              <button class="swap-settings" type="button" aria-label="Swap settings">⚙</button>
-            </div>
-
-            <div class="swap-side swap-side--pay">
-              <div class="swap-label-row"><label for="swap-amount-in">You pay</label><span>Balance <b>—</b></span></div>
-              <div class="swap-input-row">
-                <input id="swap-amount-in" type="text" inputmode="decimal" placeholder="0" aria-label="Amount to pay" />
-                <button class="swap-token" type="button"><img src="../assets/usdc-logo.png" alt="" /><b>USDC</b><span aria-hidden="true">⌄</span></button>
-              </div>
-              <div class="swap-route-row">
-                <span class="swap-route-row__label">Route</span>
-                <span class="swap-route-chip"><span class="swap-route-chip__orb">A</span> Arc Testnet <span class="swap-route-chip__dot"></span></span>
-                <span class="swap-route-row__hint">Best route <b>—</b></span>
-              </div>
-            </div>
-
-            <div class="swap-divider"><span></span><button type="button" aria-label="Switch tokens" class="swap-reverse">↓</button></div>
-
-            <div class="swap-side swap-side--receive">
-              <div class="swap-label-row"><label for="swap-amount-out">You receive</label><span>Balance <b>—</b></span></div>
-              <div class="swap-input-row">
-                <input id="swap-amount-out" type="text" inputmode="decimal" placeholder="0" aria-label="Estimated amount to receive" readonly />
-                <button class="swap-token" type="button"><img src="../assets/eurc-logo.png" alt="" /><b>EURC</b><span aria-hidden="true">⌄</span></button>
-              </div>
-              <div class="swap-estimate"><span>Rate</span><span>— USDC = — EURC</span></div>
-            </div>
-
-            <div class="swap-details"><span>Network fee <b>—</b></span><span>Slippage <b>0.50%</b></span></div>
-            <button class="swap-submit" type="button">Connect wallet</button>
-            <p class="swap-footnote">Rates and route details appear after connecting your wallet.</p>
-          </section>
-          <p class="swap-network-note"><span></span> Connected to Arc Testnet</p>
-        </div>
-      </div></main>
-    </div>
-  </div>
-  <script>
-    document.querySelectorAll('.app-nav a').forEach(function (link) {
-      if (link.dataset.page === 'swap') {
-        link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-  </script>
-
-  <script>
+/* Swap ticker (CoinGecko + Hyperliquid) — ported verbatim from app/swap.html inline script. */
+// @ts-nocheck
+/* eslint-disable */
+export function initSwapTicker() {
     (function () {
       var track = document.getElementById('swapTickerTrack');
       if (!track) return;
@@ -234,6 +146,5 @@
         }
       });
     }());
-  </script>
-</body>
-</html>
+
+}

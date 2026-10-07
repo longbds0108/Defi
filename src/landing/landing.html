@@ -1,0 +1,357 @@
+  <div class="app-shell app-shell--landing">
+    <!-- ============ Header ============ -->
+    <header class="app-header landing-header landing-header--dark" id="landingHeader">
+      <button type="button" class="app-header__left" id="brandHome">
+        <span class="brand-lock">
+          <img src="/assets/hedgora-logo.png" class="brand-lock__cream" alt="Hedgora" />
+          <img src="/assets/hedgora-logo-dark.png" class="brand-lock__dark" alt="" aria-hidden="true" />
+        </span>
+      </button>
+
+      <nav class="landing-nav" aria-label="Landing page" id="landingNav">
+        <span class="landing-nav__active-pill is-hidden" id="navPill" aria-hidden="true"></span>
+        <a href="#markets-section" data-sec="markets-section" data-idx="0">MARKETS</a>
+        <a href="#protocol-section" data-sec="protocol-section" data-idx="1">PROTOCOL</a>
+        <a href="#faq-section" data-sec="faq-section" data-idx="2">FAQ</a>
+        <a href="#" data-idx="3" id="docsLink">DOCS</a>
+      </nav>
+
+      <div class="app-header__right">
+        <button type="button" class="hg-action hg-action--compact js-launch">
+          <span>LAUNCH APP</span>
+          <span class="hg-action__icon" aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <div class="hg-page">
+        <!-- ============ Hero ============ -->
+        <section class="hg-hero hg-theme-dark" data-header-theme="dark">
+          <div class="hg-hero__copy">
+            <p class="hg-kicker">FUNDED TESTNET REWARDS · ARC TESTNET</p>
+            <h1 class="js-rise">Your capital<br />should keep<br />moving</h1>
+            <p class="hg-hero__body js-rise d1">Stake USDC or EURC, earn funded testnet rewards, and borrow without putting your position to sleep</p>
+            <div class="hg-hero__actions js-rise d2">
+              <button type="button" class="hg-action js-launch">
+                <span>LAUNCH APP</span>
+                <span class="hg-action__icon" aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+          <div class="hg-hero__visual">
+            <div class="ascii-coin-field" role="img" aria-label="An interactive field of characters forming two overlapping stablecoins">
+              <canvas id="coinCanvas" aria-hidden="true"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ Markets ============ -->
+        <section id="markets-section" class="hg-markets hg-theme-dark" data-header-theme="dark">
+          <div class="hg-markets__rail">
+            <h2>Two markets<br />One productive<br />balance</h2>
+            <p>Vault parameters are read directly from the deployed Arc Testnet contract</p>
+          </div>
+          <div class="hg-markets__cards">
+            <article class="hg-market-card">
+              <div class="hg-market-card__top">
+                <span class="hg-market-card__index">01</span>
+                <span class="hg-market-card__status"><i></i> ARC TESTNET</span>
+              </div>
+              <div class="hg-market-card__identity">
+                <img src="/assets/usdc-logo.png" alt="" />
+                <div>
+                  <h3>USDC</h3>
+                  <p>US Dollar Coin</p>
+                </div>
+              </div>
+              <div class="hg-market-card__rates">
+                <div><span>FLEXIBLE</span><strong>Revenue-based</strong></div>
+                <div><span>GROWTH / 6M</span><strong>Revenue-based</strong></div>
+                <div><span>DIAMOND / 12M</span><strong>Revenue-based</strong></div>
+              </div>
+              <p class="hg-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
+            </article>
+            <article class="hg-market-card">
+              <div class="hg-market-card__top">
+                <span class="hg-market-card__index">02</span>
+                <span class="hg-market-card__status"><i></i> ARC TESTNET</span>
+              </div>
+              <div class="hg-market-card__identity">
+                <img src="/assets/eurc-logo.png" alt="" />
+                <div>
+                  <h3>EURC</h3>
+                  <p>Euro Coin</p>
+                </div>
+              </div>
+              <div class="hg-market-card__rates">
+                <div><span>FLEXIBLE</span><strong>Revenue-based</strong></div>
+                <div><span>GROWTH / 6M</span><strong>Revenue-based</strong></div>
+                <div><span>DIAMOND / 12M</span><strong>Revenue-based</strong></div>
+              </div>
+              <p class="hg-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
+            </article>
+            <article class="hg-market-card">
+              <div class="hg-market-card__top">
+                <span class="hg-market-card__index">03</span>
+                <span class="hg-market-card__status"><i></i> ARC TESTNET</span>
+              </div>
+              <div class="hg-market-card__identity">
+                <img src="/assets/cirbtc-logo.png" alt="" />
+                <div>
+                  <h3>cirBTC</h3>
+                  <p>Circle Bitcoin</p>
+                </div>
+              </div>
+              <div class="hg-market-card__rates">
+                <div><span>FLEXIBLE</span><strong>Revenue-based</strong></div>
+                <div><span>GROWTH / 6M</span><strong>Revenue-based</strong></div>
+                <div><span>DIAMOND / 12M</span><strong>Revenue-based</strong></div>
+              </div>
+              <p class="hg-market-card__footnote">REWARDS · FUNDED BY SETTLED BORROW INTEREST</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============ Principles ============ -->
+        <section id="protocol-section" class="hg-principles hg-proto hg-theme-light" data-header-theme="light">
+          <div class="hg-proto__head">
+            <div class="hg-proto__head-left">
+              <span class="hg-proto__kicker">// The protocol</span>
+              <h2 class="hg-proto__title"><span data-scramble>Built for capital that refuses to sit still</span></h2>
+              <a class="hg-proto__cta" href="#faq-section">Discover it <span class="hg-proto__cta-arrow" aria-hidden="true">→</span></a>
+            </div>
+            <p class="hg-proto__lead">Hedgora turns staking and borrowing into one honest surface — funded rewards, borrow-while-staked liquidity, and a Health Factor that shows risk as distance to danger, not a vague label.</p>
+          </div>
+
+          <div class="hg-proto__grid">
+            <article class="hg-proto__card hg-proto__card--feature">
+              <div class="hg-proto__card-top">
+                <span class="hg-proto__num">01</span>
+                <h3>Yield first</h3>
+              </div>
+              <p class="hg-proto__card-desc">Funded reward programs flow back to stablecoin vault participants.</p>
+            </article>
+            <article class="hg-proto__card">
+              <div class="hg-proto__card-top"><span class="hg-proto__num">02</span><h3>Borrow while staking</h3></div>
+              <p class="hg-proto__card-desc">Access liquidity without forcing productive capital to stop.</p>
+            </article>
+            <article class="hg-proto__card">
+              <div class="hg-proto__card-top"><span class="hg-proto__num">03</span><h3>Health Factor clarity</h3></div>
+              <p class="hg-proto__card-desc">Risk is shown as distance to danger, not a vague status label.</p>
+            </article>
+          </div>
+
+          <div class="hg-proto__infra">
+            <p class="hg-proto__infra-lead">Built to support seamless experiences across testnet networks</p>
+            <div class="hg-proto__infra-items">
+              <div class="hg-proto__track">
+                <img class="hg-proto__logo" src="/assets/logo-base.png" alt="Base" />
+                <img class="hg-proto__logo" src="/assets/logo-robinhood.png" alt="Robinhood" />
+                <img class="hg-proto__logo" src="/assets/logo-portaldot.png" alt="PortalDot" />
+                <img class="hg-proto__logo" src="/assets/logo-pyth.png" alt="Pyth" />
+                <img class="hg-proto__logo" src="/assets/logo-ethsepolia.png" alt="Ethereum Sepolia" />
+                <img class="hg-proto__logo" src="/assets/logo-zenith.png" alt="Zenith" />
+                <img class="hg-proto__logo" src="/assets/logo-dogeos.png" alt="DogeOS" />
+                <img class="hg-proto__logo" src="/assets/logo-base.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="/assets/logo-robinhood.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="/assets/logo-portaldot.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="/assets/logo-pyth.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="/assets/logo-ethsepolia.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="/assets/logo-zenith.png" alt="" aria-hidden="true" />
+                <img class="hg-proto__logo" src="/assets/logo-dogeos.png" alt="" aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ How it works (stepper) ============ -->
+        <section id="faq-section" class="hg-steps hg-theme-dark" data-header-theme="dark">
+          <div class="hg-steps__head">
+            <span class="hg-steps__kicker">// How it works</span>
+            <h2 class="hg-steps__title">From deposit to borrow in four steps</h2>
+          </div>
+          <div class="hg-steps__row">
+            <article class="hg-steps__card">
+              <div class="hg-steps__top">
+                <span class="hg-steps__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.8 2.2a2 2 0 0 0-1.6 0L2.6 6.1a1 1 0 0 0 0 1.8l8.6 3.9a2 2 0 0 0 1.6 0l8.6-3.9a1 1 0 0 0 0-1.8Z"/><path d="M2 12a1 1 0 0 0 .6.9l8.6 3.9a2 2 0 0 0 1.6 0l8.6-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .6.9l8.6 3.9a2 2 0 0 0 1.6 0l8.6-3.9A1 1 0 0 0 22 17"/></svg>
+                </span>
+                <span class="hg-steps__num">01</span>
+              </div>
+              <div class="hg-steps__body">
+                <h3>Stake</h3>
+                <p>Deposit USDC or EURC into a Hedgora vault.</p>
+              </div>
+            </article>
+
+            <article class="hg-steps__card">
+              <div class="hg-steps__top">
+                <span class="hg-steps__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                </span>
+                <span class="hg-steps__num">02</span>
+              </div>
+              <div class="hg-steps__body">
+                <h3>Earn</h3>
+                <p>Funded testnet rewards accrue to your position.</p>
+              </div>
+            </article>
+
+            <article class="hg-steps__card">
+              <div class="hg-steps__top">
+                <span class="hg-steps__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+                </span>
+                <span class="hg-steps__num">03</span>
+              </div>
+              <div class="hg-steps__body">
+                <h3>Borrow</h3>
+                <p>Unlock liquidity while staying staked.</p>
+              </div>
+            </article>
+
+            <article class="hg-steps__card">
+              <div class="hg-steps__top">
+                <span class="hg-steps__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.5a2 2 0 0 0-1.9 1.5l-2.4 8.3a.25.25 0 0 1-.5 0L9.2 2.2a.25.25 0 0 0-.5 0l-2.3 8.3A2 2 0 0 1 4.5 12H2"/></svg>
+                </span>
+                <span class="hg-steps__num">04</span>
+              </div>
+              <div class="hg-steps__body">
+                <h3>Track</h3>
+                <p>Watch your Health Factor in real time.</p>
+              </div>
+            </article>
+
+            <span class="hg-steps__spark" aria-hidden="true"></span>
+          </div>
+        </section>
+
+        <!-- ============ CTA + Footer ============ -->
+        <div class="hg-footer-reveal">
+          <section class="hg-cta hg-sec hg-theme-light" data-header-theme="light">
+            <div class="hg-sec__panel">
+              <div class="hg-sec__left">
+                <span class="hg-sec__badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+                </span>
+                <span class="hg-sec__kicker">Safe by design</span>
+                <h2 class="hg-sec__title">You put it to work.<br>You stay in control.</h2>
+                <p class="hg-sec__body">Stake, borrow and earn without handing over your keys. Every position stays yours to adjust — and your Health Factor shows exactly where you stand.</p>
+                <button type="button" class="hg-sec__cta js-launch">Launch app <span class="hg-sec__cta-arrow" aria-hidden="true">→</span></button>
+              </div>
+              <div class="hg-sec__cards">
+                <div class="hg-sec__card">
+                  <span class="hg-sec__card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.5 12.5 7-7"/><path d="m16 7 2 2"/><path d="m19 4 2 2"/></svg>
+                  </span>
+                  <div class="hg-sec__card-text">
+                    <h3>Non-custodial</h3>
+                    <p>Your funds never leave your wallet.</p>
+                  </div>
+                </div>
+                <div class="hg-sec__card">
+                  <span class="hg-sec__card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-12 2 6h6"/></svg>
+                  </span>
+                  <div class="hg-sec__card-text">
+                    <h3>Clear Health Factor</h3>
+                    <p>Risk shown as distance to danger, not a vague label.</p>
+                  </div>
+                </div>
+                <div class="hg-sec__card">
+                  <span class="hg-sec__card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+                  </span>
+                  <div class="hg-sec__card-text">
+                    <h3>Exit anytime</h3>
+                    <p>Repay and withdraw even when staking is paused.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <footer id="footer-section" class="hg-footer hg-footer hg-theme-dark" data-header-theme="dark">
+            <div class="hg-footer__inner">
+              <div class="hg-footer__main">
+                <div class="hg-footer__brand">
+                  <img class="hg-footer__logo" src="/assets/hedgora-logo.png" alt="Hedgora" />
+                  <p class="hg-footer__desc">Productive stablecoin capital. Stake USDC or EURC, earn funded testnet rewards, and borrow without putting your position to sleep.</p>
+                  <div class="hg-footer__status">
+                    <span class="hg-footer__status-dot"></span>All systems operational · Arc Testnet
+                  </div>
+                  <div class="hg-footer__socials" aria-label="Community links">
+                    <a class="hg-footer__social-link" href="https://x.com/Hedgora_xyz" target="_blank" rel="noreferrer" aria-label="Hedgora on X">
+                      <svg class="hg-footer__social-icon" aria-hidden="true"><use href="/icons.svg#x-icon" /></svg>
+                    </a>
+                    <a class="hg-footer__social-link" href="https://github.com/longbds0108/Defi" target="_blank" rel="noreferrer" aria-label="Hedgora on GitHub">
+                      <svg class="hg-footer__social-icon" aria-hidden="true"><use href="/icons.svg#github-icon" /></svg>
+                    </a>
+                    <button class="hg-footer__social-link" type="button" aria-disabled="true" aria-label="Discord coming soon" aria-describedby="discord-coming-soon">
+                      <svg class="hg-footer__social-icon" aria-hidden="true"><use href="/icons.svg#discord-icon" /></svg>
+                      <span id="discord-coming-soon" class="hg-footer__social-tooltip" role="tooltip">COMING SOON</span>
+                    </button>
+                  </div>
+                </div>
+
+                <nav class="hg-footer__col" aria-label="Protocol">
+                  <h4>Protocol</h4>
+                  <a href="#markets-section">Markets</a>
+                  <a href="#" class="js-launch">Stake</a>
+                  <a href="#" class="js-launch">Borrow</a>
+                  <a href="#" class="js-launch">Positions</a>
+                  <a href="#" class="js-launch">Analytics</a>
+                </nav>
+
+                <nav class="hg-footer__col" aria-label="Developers">
+                  <h4>Developers</h4>
+                  <a href="https://github.com/longbds0108/Defi" target="_blank" rel="noreferrer">GitHub</a>
+                  <a href="#">Documentation</a>
+                  <a href="#">Smart contracts</a>
+                  <a href="#">Deployments</a>
+                  <a href="#">Bug bounty</a>
+                </nav>
+
+                <nav class="hg-footer__col" aria-label="Resources">
+                  <h4>Resources</h4>
+                  <a href="https://docs.arc.io" target="_blank" rel="noreferrer">Arc Docs ↗</a>
+                  <a href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Arcscan ↗</a>
+                  <a href="#faq-section">FAQ</a>
+                  <a href="#">Brand kit</a>
+                  <a href="#">Status</a>
+                </nav>
+              </div>
+            </div>
+
+            <div class="hg-footer__wordband">
+              <div class="footer-ascii-field" role="button" tabindex="0" aria-label="Play a left-to-right color pulse across the ASCII capital wave">
+                <canvas id="footerCanvas" aria-hidden="true"></canvas>
+              </div>
+              <span class="hg-footer__wordmark" aria-hidden="true">HEDGORA</span>
+            </div>
+
+            <div class="hg-footer__bottombar">
+              <span class="hg-footer__copy">© 2026 Hedgora. All rights reserved.</span>
+              <div class="hg-footer__legal">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Risk disclosure</a>
+              </div>
+              <span class="hg-footer__warn">Testnet build · tokens have no value</span>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============ Route curtain ============ -->
+    <div class="route-curtain" id="routeCurtain" aria-hidden="true">
+      <i style="--curtain-index:0"></i><i style="--curtain-index:1"></i><i style="--curtain-index:2"></i>
+      <i style="--curtain-index:3"></i><i style="--curtain-index:4"></i><i style="--curtain-index:5"></i>
+      <i style="--curtain-index:6"></i><i style="--curtain-index:7"></i><i style="--curtain-index:8"></i>
+      <i style="--curtain-index:9"></i><i style="--curtain-index:10"></i><i style="--curtain-index:11"></i>
+      <span>HEDGORA / ENTERING PROTOCOL</span>
+    </div>
+  </div>

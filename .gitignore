@@ -3,5 +3,10 @@
 node_modules/
 dist/
 
+# Env (local secrets like VITE_WALLETCONNECT_PROJECT_ID)
+.env
+.env.local
+.env.*.local
+
 # OS
 .DS_Store

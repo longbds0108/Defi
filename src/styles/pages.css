@@ -51,7 +51,11 @@
   }
 
   .pages-header .app-header__right {
-    display: none;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -282,13 +286,18 @@
 
 /* Persistent left navigation for the app workspace */
 .pages-header {
-  grid-template-columns: 1fr;
-  justify-items: start;
+  grid-template-columns: auto 1fr;
+  align-items: center;
   height: 72px;
   padding: 0 28px;
 }
-.pages-header .app-header__left { grid-column: 1; }
-.pages-header .app-header__right { display: none; }
+.pages-header .app-header__left { grid-column: 1; justify-self: start; }
+.pages-header .app-header__right {
+  grid-column: 2;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+}
 .pages-layout {
   display: grid;
   grid-template-columns: 248px minmax(0, 1fr);
