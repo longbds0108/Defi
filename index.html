@@ -227,6 +227,8 @@
       background: linear-gradient(90deg, transparent, rgba(64, 184, 255, 0.85));
     }
     @keyframes hg-neon-run { from { left: -4%; } to { left: 104%; } }
+    /* Mobile: comet runs top -> bottom (box 1 -> box 4); clipped so it never overflows */
+    @keyframes hg-neon-run-v { from { top: -6%; } to { top: 106%; } }
     @media (prefers-reduced-motion: reduce) { .hg-steps__spark { display: none; } }
     .hg-steps__card {
       position: relative; z-index: 1;
@@ -259,9 +261,24 @@
       .hg-steps__card { min-height: 280px; }
     }
     @media (max-width: 560px) {
-      .hg-steps__row { grid-template-columns: 1fr; }
+      .hg-steps__row { grid-template-columns: 1fr; gap: 22px; overflow: hidden; }
       .hg-steps__card { min-height: 0; padding: 26px 24px 28px; }
       .hg-steps__body { margin-top: 30px; }
+      /* Vertical connector down the icon-centre column (x = 24px pad + 28px half-icon) */
+      .hg-steps__row::before {
+        display: block; left: 52px; right: auto; top: 0; bottom: 0; width: 1px; height: auto;
+        background: linear-gradient(180deg, transparent, rgba(123,150,255,0.18) 5%, rgba(123,150,255,0.18) 95%, transparent);
+      }
+      /* Neon comet running top -> bottom along that line (shows in the gaps between cards) */
+      .hg-steps__spark {
+        display: block; left: 52px; top: 0; margin: 0 0 0 -3.5px;
+        animation: hg-neon-run-v 3.8s linear infinite;
+      }
+      .hg-steps__spark::before {
+        top: auto; bottom: 50%; left: 50%; right: auto; transform: translateX(-50%);
+        width: 2px; height: 130px;
+        background: linear-gradient(180deg, transparent, rgba(64,184,255,0.85));
+      }
     }
 
     /* ---------- Professional footer ---------- */
