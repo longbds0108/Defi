@@ -194,6 +194,7 @@
 .token-select, .network-select { display: inline-flex; align-items: center; justify-content: space-between; gap: 9px; min-height: 42px; padding: 0 12px; border: 1px solid rgba(255,255,255,.1); border-radius: 999px; color: #f1eef5; background: #28242e; font: inherit; font-size: 0.8rem; white-space: nowrap; cursor: pointer; }
 .network-select { width: 100%; border-radius: 11px; }
 .token-dot { display: inline-grid; flex: 0 0 auto; width: 24px; height: 24px; place-items: center; border-radius: 50%; color: #fff; font-size: 0.72rem; font-style: normal; }
+.token-logo { display: inline-block; flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; vertical-align: middle; background: #0e0b14; }
 .token-dot--usdc { background: #2775ca; }
 .token-dot--eurc { color: #122244; background: #8bc2ff; }
 .token-dot--eth { color: #18243a; background: #aebcdd; }

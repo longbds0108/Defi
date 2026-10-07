@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAccount, useBalance } from 'wagmi';
 import { formatUnits } from 'viem';
 import ConnectCta from '../components/ConnectCta';
+import TokenLogo from '../components/TokenLogo';
 
 function formatAmount(value: bigint, decimals: number) {
   const n = Number(formatUnits(value, decimals));
@@ -59,7 +60,7 @@ export default function Dashboard() {
           <div className="data-table">
             <div className="table-row table-head"><span>Asset</span><span>Type</span><span>Balance</span><span>Network</span></div>
             <div className="table-row">
-              <span className="asset-pair"><i className="token-dot token-dot--usdc">$</i><b>{balance?.symbol ?? '—'}</b></span>
+              <span className="asset-pair"><TokenLogo symbol={balance?.symbol} /><b>{balance?.symbol ?? '—'}</b></span>
               <span>Wallet</span>
               <span>{loadingBal ? '…' : balance ? formatAmount(balance.value, balance.decimals) : '—'}</span>
               <span>{chain?.name ?? '—'}</span>
