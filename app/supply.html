@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lend / Supply — Hedgora</title>
+  <link rel="icon" href="../assets/hedgora-icon.png" type="image/png" />
+  <link rel="stylesheet" href="../styles/index.css" />
+  <link rel="stylesheet" href="../styles/App.css" />
+  <link rel="stylesheet" href="../styles/pages.css" />
+</head>
+<body>
+  <div class="app-shell app-shell--pages">
+    <header class="app-header pages-header">
+      <a class="app-header__left pages-brand" href="../index.html" aria-label="Hedgora home">
+        <img class="pages-brand__logo" src="../assets/hedgora-logo.png" alt="Hedgora" />
+      </a>
+      <div class="app-header__right"></div>
+    </header>
+    <div class="pages-layout">
+      <aside class="pages-sidebar" aria-label="Workspace">
+        <nav class="app-nav" aria-label="App navigation">
+        <a href="dashboard.html" data-page="dashboard">Dashboard</a>
+        <a href="swap.html" data-page="swap">Swap</a>
+        <a href="bridge.html" data-page="bridge">Bridge / Deposit / Withdraw</a>
+        <a href="pools.html" data-page="pools">Liquidity / Pools</a>
+        <a href="supply.html" data-page="supply">Lend / Supply</a>
+        <a href="borrow.html" data-page="borrow">Borrow</a>
+        <a href="vaults.html" data-page="vaults">Vaults / Strategies</a>
+        <a href="portfolio.html" data-page="portfolio">Portfolio / Positions</a>
+        </nav>
+      </aside>
+      <main class="app-main pages-main" aria-label="Lend / Supply">
+      <div class="pages-content">
+        <div class="page-heading"><div><p class="page-eyebrow">LEND · ARC TESTNET</p><h1>Lend / Supply</h1><p class="page-intro">Supply assets to earn variable yield.</p></div><button class="ui-button ui-button--outline" type="button">My supplies <span aria-hidden="true">→</span></button></div>
+<section class="metric-grid metric-grid--three"><article class="ui-card metric-card"><span>Total supplied</span><strong>$—</strong><small>Your active supply</small></article><article class="ui-card metric-card"><span>Available to supply</span><strong>$—</strong><small>Across supported assets</small></article><article class="ui-card metric-card"><span>Average supply APY</span><strong>—</strong><small>Variable rate</small></article></section>
+<div class="workbench"><section class="ui-card form-card"><div class="section-heading"><div><p class="page-eyebrow">SUPPLY ASSETS</p><h2>Choose an asset</h2></div></div><div class="token-field"><div class="field-top"><label>Asset</label><span>Wallet balance —</span></div><button class="network-select" type="button"><span class="asset-pair"><i class="token-dot token-dot--usdc">$</i> USDC</span><span>⌄</span></button></div><div class="token-field"><div class="field-top"><label>Amount</label><span>Available —</span></div><div class="token-input-row"><input inputmode="decimal" placeholder="0.00" aria-label="Supply amount" /><button class="max-button" type="button">MAX</button></div></div><div class="form-detail"><span>Supply APY</span><b>—</b></div><button class="ui-button ui-button--primary ui-button--wide" type="button">Connect wallet</button></section><aside class="ui-card side-card"><p class="page-eyebrow">SUPPLY MARKETS</p><h2>Supported assets</h2><div class="mini-asset-row"><span class="asset-pair"><i class="token-dot token-dot--usdc">$</i><b>USDC</b></span><span>APY <b>—</b></span></div><div class="mini-asset-row"><span class="asset-pair"><i class="token-dot token-dot--eurc">€</i><b>EURC</b></span><span>APY <b>—</b></span></div></aside></div>
+      </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.app-nav a').forEach(function (link) {
+      if (link.dataset.page === 'supply') {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bridge / Deposit / Withdraw — Hedgora</title>
+  <link rel="icon" href="../assets/hedgora-icon.png" type="image/png" />
+  <link rel="stylesheet" href="../styles/index.css" />
+  <link rel="stylesheet" href="../styles/App.css" />
+  <link rel="stylesheet" href="../styles/pages.css" />
+</head>
+<body>
+  <div class="app-shell app-shell--pages">
+    <header class="app-header pages-header">
+      <a class="app-header__left pages-brand" href="../index.html" aria-label="Hedgora home">
+        <img class="pages-brand__logo" src="../assets/hedgora-logo.png" alt="Hedgora" />
+      </a>
+      <div class="app-header__right"></div>
+    </header>
+    <div class="pages-layout">
+      <aside class="pages-sidebar" aria-label="Workspace">
+        <nav class="app-nav" aria-label="App navigation">
+        <a href="dashboard.html" data-page="dashboard">Dashboard</a>
+        <a href="swap.html" data-page="swap">Swap</a>
+        <a href="bridge.html" data-page="bridge">Bridge / Deposit / Withdraw</a>
+        <a href="pools.html" data-page="pools">Liquidity / Pools</a>
+        <a href="supply.html" data-page="supply">Lend / Supply</a>
+        <a href="borrow.html" data-page="borrow">Borrow</a>
+        <a href="vaults.html" data-page="vaults">Vaults / Strategies</a>
+        <a href="portfolio.html" data-page="portfolio">Portfolio / Positions</a>
+        </nav>
+      </aside>
+      <main class="app-main pages-main" aria-label="Bridge / Deposit / Withdraw">
+      <div class="pages-content">
+        <div class="page-heading"><div><p class="page-eyebrow">MOVE ASSETS · ARC TESTNET</p><h1>Bridge / Deposit / Withdraw</h1><p class="page-intro">Move assets between your wallet and supported networks.</p></div></div>
+<section class="ui-card section-card"><div class="segmented-control" role="tablist" aria-label="Asset movement"><button class="is-selected" type="button" role="tab" aria-selected="true">Bridge</button><button type="button" role="tab" aria-selected="false">Deposit</button><button type="button" role="tab" aria-selected="false">Withdraw</button></div><div class="movement-layout"><div class="form-stack"><div class="token-field"><div class="field-top"><label>From network</label><span>Wallet balance —</span></div><button class="network-select" type="button">Select network <span>⌄</span></button></div><div class="token-field"><div class="field-top"><label>Asset and amount</label><span>Available —</span></div><div class="token-input-row"><input inputmode="decimal" placeholder="0.00" aria-label="Asset amount" /><button class="token-select" type="button">Select token <span>⌄</span></button></div></div><div class="token-field"><div class="field-top"><label>To network</label></div><button class="network-select" type="button">Arc Testnet <span>⌄</span></button></div><button class="ui-button ui-button--primary ui-button--wide" type="button">Connect wallet</button></div><aside class="info-panel"><span class="info-icon">↗</span><h3>Transfer overview</h3><p>Estimated time <b>—</b></p><p>Network fee <b>—</b></p><p>You receive <b>—</b></p></aside></div></section>
+      </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.app-nav a').forEach(function (link) {
+      if (link.dataset.page === 'bridge') {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  </script>
+</body>
+</html>

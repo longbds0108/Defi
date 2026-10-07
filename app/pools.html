@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liquidity / Pools — Hedgora</title>
+  <link rel="icon" href="../assets/hedgora-icon.png" type="image/png" />
+  <link rel="stylesheet" href="../styles/index.css" />
+  <link rel="stylesheet" href="../styles/App.css" />
+  <link rel="stylesheet" href="../styles/pages.css" />
+</head>
+<body>
+  <div class="app-shell app-shell--pages">
+    <header class="app-header pages-header">
+      <a class="app-header__left pages-brand" href="../index.html" aria-label="Hedgora home">
+        <img class="pages-brand__logo" src="../assets/hedgora-logo.png" alt="Hedgora" />
+      </a>
+      <div class="app-header__right"></div>
+    </header>
+    <div class="pages-layout">
+      <aside class="pages-sidebar" aria-label="Workspace">
+        <nav class="app-nav" aria-label="App navigation">
+        <a href="dashboard.html" data-page="dashboard">Dashboard</a>
+        <a href="swap.html" data-page="swap">Swap</a>
+        <a href="bridge.html" data-page="bridge">Bridge / Deposit / Withdraw</a>
+        <a href="pools.html" data-page="pools">Liquidity / Pools</a>
+        <a href="supply.html" data-page="supply">Lend / Supply</a>
+        <a href="borrow.html" data-page="borrow">Borrow</a>
+        <a href="vaults.html" data-page="vaults">Vaults / Strategies</a>
+        <a href="portfolio.html" data-page="portfolio">Portfolio / Positions</a>
+        </nav>
+      </aside>
+      <main class="app-main pages-main" aria-label="Liquidity / Pools">
+      <div class="pages-content">
+        <div class="page-heading"><div><p class="page-eyebrow">LIQUIDITY · ARC TESTNET</p><h1>Liquidity / Pools</h1><p class="page-intro">Explore liquidity markets and pool opportunities.</p></div><button class="ui-button ui-button--outline" type="button">My positions <span aria-hidden="true">→</span></button></div>
+<section class="metric-grid metric-grid--three"><article class="ui-card metric-card"><span>Total liquidity</span><strong>$—</strong><small>Across all pools</small></article><article class="ui-card metric-card"><span>Active pools</span><strong>—</strong><small>Available markets</small></article><article class="ui-card metric-card"><span>Your liquidity</span><strong>$—</strong><small>Connect wallet to view</small></article></section>
+<section class="ui-card section-card"><div class="section-heading"><div><p class="page-eyebrow">AVAILABLE MARKETS</p><h2>Liquidity pools</h2></div><div class="search-field"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search pools" aria-label="Search pools" /></div></div><div class="data-table"><div class="table-row table-head"><span>Pool</span><span>TVL</span><span>APY</span><span></span></div><div class="table-row"><span class="asset-pair"><i class="token-dot token-dot--usdc">$</i><i class="token-dot token-dot--eurc">€</i><b>USDC / EURC</b></span><span>—</span><span class="accent-value">—</span><button class="ui-button ui-button--small" type="button">View pool</button></div><div class="table-row"><span class="asset-pair"><i class="token-dot token-dot--usdc">$</i><i class="token-dot token-dot--eth">◆</i><b>USDC / ETH</b></span><span>—</span><span class="accent-value">—</span><button class="ui-button ui-button--small" type="button">View pool</button></div></div></section>
+      </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.app-nav a').forEach(function (link) {
+      if (link.dataset.page === 'pools') {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  </script>
+</body>
+</html>

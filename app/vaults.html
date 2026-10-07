@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vaults / Strategies — Hedgora</title>
+  <link rel="icon" href="../assets/hedgora-icon.png" type="image/png" />
+  <link rel="stylesheet" href="../styles/index.css" />
+  <link rel="stylesheet" href="../styles/App.css" />
+  <link rel="stylesheet" href="../styles/pages.css" />
+</head>
+<body>
+  <div class="app-shell app-shell--pages">
+    <header class="app-header pages-header">
+      <a class="app-header__left pages-brand" href="../index.html" aria-label="Hedgora home">
+        <img class="pages-brand__logo" src="../assets/hedgora-logo.png" alt="Hedgora" />
+      </a>
+      <div class="app-header__right"></div>
+    </header>
+    <div class="pages-layout">
+      <aside class="pages-sidebar" aria-label="Workspace">
+        <nav class="app-nav" aria-label="App navigation">
+        <a href="dashboard.html" data-page="dashboard">Dashboard</a>
+        <a href="swap.html" data-page="swap">Swap</a>
+        <a href="bridge.html" data-page="bridge">Bridge / Deposit / Withdraw</a>
+        <a href="pools.html" data-page="pools">Liquidity / Pools</a>
+        <a href="supply.html" data-page="supply">Lend / Supply</a>
+        <a href="borrow.html" data-page="borrow">Borrow</a>
+        <a href="vaults.html" data-page="vaults">Vaults / Strategies</a>
+        <a href="portfolio.html" data-page="portfolio">Portfolio / Positions</a>
+        </nav>
+      </aside>
+      <main class="app-main pages-main" aria-label="Vaults / Strategies">
+      <div class="pages-content">
+        <div class="page-heading"><div><p class="page-eyebrow">AUTOMATED YIELD · ARC TESTNET</p><h1>Vaults / Strategies</h1><p class="page-intro">Explore strategies built for stablecoin capital.</p></div><button class="ui-button ui-button--outline" type="button">My vaults <span aria-hidden="true">→</span></button></div>
+<section class="metric-grid metric-grid--three"><article class="ui-card metric-card"><span>Total value locked</span><strong>$—</strong><small>Across strategies</small></article><article class="ui-card metric-card"><span>Strategies</span><strong>—</strong><small>Available vaults</small></article><article class="ui-card metric-card"><span>Your deposits</span><strong>$—</strong><small>Connect wallet to view</small></article></section>
+<div class="section-heading standalone-heading"><div><p class="page-eyebrow">STRATEGY DIRECTORY</p><h2>Explore vaults</h2></div><div class="filter-chip-row"><button class="filter-chip is-selected" type="button">All assets</button><button class="filter-chip" type="button">Stablecoins</button></div></div><section class="vault-grid"><article class="ui-card vault-card"><div class="vault-card__top"><span class="token-dot token-dot--usdc">$</span><span class="status-pill"><i></i> Open</span></div><p class="page-eyebrow">STABLECOIN STRATEGY</p><h3>USDC yield vault</h3><p class="vault-card__copy">A strategy for USDC deposits.</p><div class="vault-card__stats"><span>Est. APY <b>—</b></span><span>TVL <b>$—</b></span></div><button class="ui-button ui-button--outline ui-button--wide" type="button">View strategy <span>→</span></button></article><article class="ui-card vault-card"><div class="vault-card__top"><span class="token-dot token-dot--eurc">€</span><span class="status-pill"><i></i> Open</span></div><p class="page-eyebrow">STABLECOIN STRATEGY</p><h3>EURC yield vault</h3><p class="vault-card__copy">A strategy for EURC deposits.</p><div class="vault-card__stats"><span>Est. APY <b>—</b></span><span>TVL <b>$—</b></span></div><button class="ui-button ui-button--outline ui-button--wide" type="button">View strategy <span>→</span></button></article></section>
+      </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.app-nav a').forEach(function (link) {
+      if (link.dataset.page === 'vaults') {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  </script>
+</body>
+</html>
