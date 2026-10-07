@@ -2,6 +2,7 @@
 .vite/
 node_modules/
 dist/
+*.tsbuildinfo
 
 # Env (local secrets like VITE_WALLETCONNECT_PROJECT_ID)
 .env
