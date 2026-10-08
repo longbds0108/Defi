@@ -3,6 +3,8 @@ import './styles/index.css';
 import './styles/App.css';
 import './styles/pages.css';
 import './styles/landing.css';
+import './styles/swap.css';
+import './styles/pools.css';
 
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -21,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
   <WagmiProvider config={config}>
     <QueryClientProvider client={queryClient}>
       <RainbowKitProvider
+        locale="en"
         theme={darkTheme({
           accentColor: '#0b53bf',
           accentColorForeground: '#ffffff',

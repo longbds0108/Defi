@@ -1896,7 +1896,7 @@ html, body {
   margin-bottom: 36px;
 }
 
-/* Thêm thẻ cha hoặc tăng độ ưu tiên để tránh bị đè khi reload */
+/* Raise specificity so these rules survive a reload */
 .markets-card {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;

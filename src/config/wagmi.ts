@@ -1,5 +1,5 @@
 import { getDefaultConfig, type Chain } from '@rainbow-me/rainbowkit';
-import { mainnet, sepolia, base, arbitrum, optimism, polygon } from 'wagmi/chains';
+import { sepolia } from 'wagmi/chains';
 
 /**
  * Arc Testnet — the network Hedgora targets.
@@ -30,12 +30,32 @@ export const arcTestnet = {
 } as const satisfies Chain;
 
 /**
+ * Robinhood Chain Testnet — an Arbitrum-based L2 (ETH gas).
+ * Docs: https://docs.robinhood.com/chain/connecting
+ *   Chain ID 46630 · public RPC https://rpc.testnet.chain.robinhood.com/rpc
+ *   Explorer https://explorer.testnet.chain.robinhood.com
+ */
+export const robinhoodTestnet = {
+  id: 46630,
+  name: 'Robinhood Chain Testnet',
+  iconUrl: '/assets/robinhood-chain.png',
+  iconBackground: '#c9f31d',
+  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  rpcUrls: {
+    default: { http: ['https://rpc.testnet.chain.robinhood.com/rpc'] },
+  },
+  blockExplorers: {
+    default: { name: 'Robinhood Explorer', url: 'https://explorer.testnet.chain.robinhood.com' },
+  },
+  testnet: true,
+} as const satisfies Chain;
+
+/**
  * wagmi + RainbowKit configuration.
  *
- * Arc Testnet is listed first, so it is the app's default chain and the one the
- * network switcher opens on. The other chains keep RainbowKit's chain selector
- * populated (and let a wallet that's on another network switch instead of
- * showing "Wrong network"). Trim this list to `[arcTestnet]` for Arc-only.
+ * TESTNET ONLY — this app never uses mainnet chains or tokens. Arc Testnet is
+ * listed first (the app's default); Robinhood Chain Testnet and Sepolia keep the
+ * network switcher populated. Do not add mainnet chains here.
  *
  * No `transports` map is needed: `getDefaultConfig` creates an http() transport
  * per chain from each chain's default RPC (Arc uses the RPC defined above).
@@ -47,6 +67,6 @@ export const arcTestnet = {
 export const config = getDefaultConfig({
   appName: 'Hedgora',
   projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID ?? 'YOUR_PROJECT_ID',
-  chains: [arcTestnet, mainnet, sepolia, base, arbitrum, optimism, polygon],
+  chains: [arcTestnet, robinhoodTestnet, sepolia],
   ssr: false,
 });
