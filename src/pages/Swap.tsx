@@ -407,19 +407,33 @@ export default function Swap() {
               </p>
             )}
           </section>
-
-          {history.length > 0 && (
-            <div className="swap-history">
-              <h3>Swap history</h3>
-              {history.map((h) => (
-                <div key={h.hash} className="swap-history__row">
-                  <span>{h.payAmount} {h.paySymbol} → {h.recvAmount} {h.recvSymbol}</span>
-                  <a href={`${EXPLORER}/tx/${h.hash}`} target="_blank" rel="noreferrer">{h.hash.slice(0, 8)}… ↗</a>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
+
+        <aside className="swap-side">
+          <div className="swap-history-box">
+            <h3>Swap history</h3>
+            {history.length > 0 ? (
+              <div className="swap-history">
+                {history.map((h) => (
+                  <div key={h.hash} className="swap-history__row">
+                    <div className="swap-history__pair">
+                      <span>{h.payAmount} {h.paySymbol}</span>
+                      <span className="swap-history__arrow" aria-hidden="true">→</span>
+                      <span>{h.recvAmount} {h.recvSymbol}</span>
+                    </div>
+                    <a href={`${EXPLORER}/tx/${h.hash}`} target="_blank" rel="noreferrer">{h.hash.slice(0, 8)}… ↗</a>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="swap-history-empty">
+                <span className="empty-orb" aria-hidden="true">✳</span>
+                <strong>No swaps yet</strong>
+                <p>Your swaps will appear here.</p>
+              </div>
+            )}
+          </div>
+        </aside>
       </div>
     </div>
   );

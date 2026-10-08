@@ -16,7 +16,8 @@ import {
   arcGasHeadroom,
 } from '../config/arcDex';
 
-type Phase = 'idle' | 'approvingA' | 'approvingB' | 'adding';
+type Phase = 'idle' | 'approvingA' | 'approvingB' | 'adding' | 'approvingLP' | 'removing';
+type Tab = 'pools' | 'positions' | 'remove';
 type PoolRaw = {
   ai: number;
   bi: number;
@@ -31,7 +32,6 @@ const TOK = ARC_TESTNET_TOKENS;
 const PAIRS: [number, number][] = [
   [0, 1], // USDC / EURC
   [0, 2], // USDC / cirBTC
-  [1, 2], // EURC / cirBTC
 ];
 const EXPLORER = arcTestnet.blockExplorers.default.url;
 const FEE_TIER = '0.30%';
@@ -63,9 +63,11 @@ export default function Pools() {
 
   const [pools, setPools] = useState<PoolRaw[]>([]);
   const [prices, setPrices] = useState<Record<string, number>>({});
-  const [tab, setTab] = useState<'pools' | 'positions'>('pools');
+  const [tab, setTab] = useState<Tab>('pools');
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<'add' | 'remove'>('add');
+  const [removePct, setRemovePct] = useState(100);
 
   const [tokenA, setTokenA] = useState<Token>(TOK[0]); // USDC
   const [tokenB, setTokenB] = useState<Token>(TOK[2]); // cirBTC
@@ -164,7 +166,7 @@ export default function Pools() {
   const visiblePools = pools.filter((p) => {
     const a = TOK[p.ai];
     const b = TOK[p.bi];
-    if (tab === 'positions' && !(p.yourLP && p.yourLP > 0n)) return false;
+    if ((tab === 'positions' || tab === 'remove') && !(p.yourLP && p.yourLP > 0n)) return false;
     if (search) {
       const q = search.toLowerCase();
       if (!a.symbol.toLowerCase().includes(q) && !b.symbol.toLowerCase().includes(q)) return false;
@@ -229,6 +231,15 @@ export default function Pools() {
     setAmountA('');
     setAmountB('');
     clearStatus();
+    setModalMode('add');
+    setModalOpen(true);
+  };
+  const openRemove = (p: PoolRaw) => {
+    setTokenA(TOK[p.ai]);
+    setTokenB(TOK[p.bi]);
+    setRemovePct(100);
+    clearStatus();
+    setModalMode('remove');
     setModalOpen(true);
   };
   const closeModal = () => {
@@ -237,6 +248,13 @@ export default function Pools() {
 
   const rawA = toRaw(amountA, tokenA.decimals);
   const rawB = toRaw(amountB, tokenB.decimals);
+
+  // Remove-liquidity amounts for the selected position.
+  const yourLP = selected?.yourLP ?? 0n;
+  const totalSupply = selected?.totalSupply ?? 0n;
+  const removeLiquidityAmt = yourLP > 0n ? (yourLP * BigInt(removePct)) / 100n : 0n;
+  const removeOutA = totalSupply > 0n && resForA ? (resForA * removeLiquidityAmt) / totalSupply : 0n;
+  const removeOutB = totalSupply > 0n && resForB ? (resForB * removeLiquidityAmt) / totalSupply : 0n;
   const initialPrice =
     !selExists && Number(amountA) > 0 && Number(amountB) > 0
       ? `1 ${tokenA.symbol} = ${(Number(amountB) / Number(amountA)).toLocaleString('en-US', { maximumFractionDigits: 8 })} ${tokenB.symbol}`
@@ -285,6 +303,44 @@ export default function Pools() {
     }
   }
 
+  async function removeLiquidity() {
+    if (!publicClient || !address || !selected?.pair || yourLP <= 0n || totalSupply <= 0n || removeLiquidityAmt <= 0n) return;
+    const account = address;
+    const pair = selected.pair;
+    setError(undefined);
+    setLastHash(undefined);
+    try {
+      // Approve the LP token (the pair) to the router.
+      const allowance = (await publicClient.readContract({ address: pair, abi: erc20Abi, functionName: 'allowance', args: [account, ARC_SWAP_ROUTER] })) as bigint;
+      if (allowance < removeLiquidityAmt) {
+        setPhase('approvingLP');
+        const hash = await writeContractAsync({ address: pair, abi: erc20Abi, functionName: 'approve', args: [ARC_SWAP_ROUTER, removeLiquidityAmt], chainId: ARC_DEX_CHAIN_ID, gas: 2_000_000n });
+        await publicClient.waitForTransactionReceipt({ hash });
+      }
+      setPhase('removing');
+      const minA = removeOutA - (removeOutA * ARC_SWAP_SLIPPAGE_BPS) / 10_000n;
+      const minB = removeOutB - (removeOutB * ARC_SWAP_SLIPPAGE_BPS) / 10_000n;
+      const deadline = BigInt(Math.floor(Date.now() / 1000) + 1200);
+      const args = [tokenA.address, tokenB.address, removeLiquidityAmt, minA, minB, account, deadline] as const;
+      await publicClient.simulateContract({ account, address: ARC_SWAP_ROUTER, abi: arcRouterAbi, functionName: 'removeLiquidity', args });
+      let gas: bigint;
+      try {
+        gas = arcGasHeadroom(await publicClient.estimateContractGas({ account, address: ARC_SWAP_ROUTER, abi: arcRouterAbi, functionName: 'removeLiquidity', args }));
+      } catch {
+        gas = arcGasHeadroom();
+      }
+      const hash = await writeContractAsync({ address: ARC_SWAP_ROUTER, abi: arcRouterAbi, functionName: 'removeLiquidity', args, chainId: ARC_DEX_CHAIN_ID, gas });
+      await publicClient.waitForTransactionReceipt({ hash });
+      setLastHash(hash);
+      refetchA();
+      refetchB();
+    } catch (e) {
+      setError(mapError(e));
+    } finally {
+      setPhase('idle');
+    }
+  }
+
   const phaseLabel =
     phase === 'approvingA' ? `Approve ${tokenA.symbol}…`
     : phase === 'approvingB' ? `Approve ${tokenB.symbol}…`
@@ -310,6 +366,26 @@ export default function Pools() {
     );
   }
 
+  const removePhaseLabel = phase === 'approvingLP' ? 'Approve LP…' : phase === 'removing' ? 'Removing…' : 'Remove liquidity';
+  let removeAction;
+  if (!isConnected) {
+    removeAction = <ConnectCta className="swapbox__cta swapbox__cta--connect">Connect wallet</ConnectCta>;
+  } else if (!onArc) {
+    removeAction = (
+      <button type="button" className="swapbox__cta swapbox__cta--connect" onClick={() => switchChain?.({ chainId: ARC_DEX_CHAIN_ID })}>
+        Switch to Arc Testnet
+      </button>
+    );
+  } else if (yourLP <= 0n) {
+    removeAction = <button type="button" className="swapbox__cta" disabled>No position to remove</button>;
+  } else {
+    removeAction = (
+      <button type="button" className="swapbox__cta swapbox__cta--connect" onClick={removeLiquidity} disabled={busy}>
+        {removePhaseLabel}
+      </button>
+    );
+  }
+
   return (
     <div className="pages-content">
       <div className="page-heading">
@@ -329,16 +405,17 @@ export default function Pools() {
 
       {/* Toolbar */}
       <div className="pools-toolbar">
-        <div className="pools-tabs">
-          <button type="button" className={`pools-tab${tab === 'pools' ? ' is-active' : ''}`} onClick={() => setTab('pools')}>Pools</button>
-          <button type="button" className={`pools-tab${tab === 'positions' ? ' is-active' : ''}`} onClick={() => setTab('positions')}>My Positions</button>
+        <div className="pools-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected={tab === 'pools'} className={`pools-tab${tab === 'pools' ? ' is-active' : ''}`} onClick={() => setTab('pools')}>Pools</button>
+          <button type="button" role="tab" aria-selected={tab === 'positions'} className={`pools-tab${tab === 'positions' ? ' is-active' : ''}`} onClick={() => setTab('positions')}>My Positions</button>
+          <button type="button" role="tab" aria-selected={tab === 'remove'} className={`pools-tab${tab === 'remove' ? ' is-active' : ''}`} onClick={() => setTab('remove')}>Remove Pools</button>
         </div>
         <div className="pools-toolbar__right">
           <label className="pools-search">
             <span aria-hidden="true">⌕</span>
             <input type="search" placeholder="Search pools" aria-label="Search pools" value={search} onChange={(e) => setSearch(e.target.value)} />
           </label>
-          <button type="button" className="pools-newbtn" onClick={() => setModalOpen(true)}>
+          <button type="button" className="pools-newbtn" onClick={() => { setModalMode('add'); setModalOpen(true); }}>
             <span aria-hidden="true">+</span> New position
           </button>
         </div>
@@ -382,16 +459,20 @@ export default function Pools() {
                   <span className="pooltable__num pooltable__muted">—</span>
                   <span className="pooltable__num pooltable__muted">—</span>
                   <span className="pooltable__right">
-                    <button type="button" className={`addbtn${exists ? '' : ' addbtn--create'}`} onClick={() => openAdd(p)}>
-                      <span aria-hidden="true">+</span> {exists ? 'Add' : 'Create'}
-                    </button>
+                    {tab === 'remove' ? (
+                      <button type="button" className="addbtn addbtn--remove" onClick={() => openRemove(p)}>Remove</button>
+                    ) : (
+                      <button type="button" className={`addbtn${exists ? '' : ' addbtn--create'}`} onClick={() => openAdd(p)}>
+                        <span aria-hidden="true">+</span> {exists ? 'Add' : 'Create'}
+                      </button>
+                    )}
                   </span>
                 </div>
               );
             })}
 
             {visiblePools.length === 0 && (
-              <div className="pools-empty">{tab === 'positions' ? 'No positions yet — add liquidity to a pool.' : 'No pools match your search.'}</div>
+              <div className="pools-empty">{tab === 'positions' || tab === 'remove' ? 'No positions yet — add liquidity to a pool first.' : 'No pools match your search.'}</div>
             )}
           </div>
         </div>
@@ -403,9 +484,41 @@ export default function Pools() {
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal__head">
-              <h2>Add liquidity</h2>
+              <h2>{modalMode === 'remove' ? 'Remove liquidity' : 'Add liquidity'}</h2>
               <button type="button" className="modal__close" aria-label="Close" onClick={closeModal}>×</button>
             </div>
+            {modalMode === 'remove' ? (
+              <section className="swapbox" aria-label="Remove liquidity">
+                <div className="swapfield">
+                  <div className="swapfield__top"><span className="swapfield__label">Position</span></div>
+                  <div className="remove-pair">
+                    <span className="pool-logos">
+                      <img src={tokenA.logo} alt="" width={30} height={30} />
+                      <img src={tokenB.logo} alt="" width={30} height={30} />
+                    </span>
+                    <b>{tokenA.symbol}/{tokenB.symbol}</b>
+                  </div>
+                  <div className="swapbox__balance">Your position <b>{usd(selected ? yourUsd(selected) : 0)}</b></div>
+                </div>
+                <div className="swapfield">
+                  <div className="swapfield__top"><span className="swapfield__label">Amount to remove</span><b className="remove-pct-val">{removePct}%</b></div>
+                  <div className="remove-pcts">
+                    {[25, 50, 75, 100].map((p) => (
+                      <button key={p} type="button" className={`swapbox__pct${removePct === p ? ' is-on' : ''}`} onClick={() => { setRemovePct(p); clearStatus(); }}>{p}%</button>
+                    ))}
+                  </div>
+                  <div className="remove-out">
+                    <div className="remove-out__row"><span>You receive</span><b>{fmt(removeOutA, tokenA.decimals)} {tokenA.symbol}</b></div>
+                    <div className="remove-out__row"><span></span><b>{fmt(removeOutB, tokenB.decimals)} {tokenB.symbol}</b></div>
+                  </div>
+                </div>
+                {removeAction}
+                {error && <p className="swapbox__note swapbox__note--error">{error}</p>}
+                {lastHash && (
+                  <p className="swapbox__note swapbox__note--ok">Liquidity removed · <a href={`${EXPLORER}/tx/${lastHash}`} target="_blank" rel="noreferrer">explorer ↗</a></p>
+                )}
+              </section>
+            ) : (
             <section className="swapbox" aria-label="Add liquidity">
               <div className="swapfield">
                 <div className="swapfield__top"><span className="swapfield__label">Token A</span></div>
@@ -443,6 +556,7 @@ export default function Pools() {
                 </p>
               )}
             </section>
+            )}
           </div>
         </div>
       )}

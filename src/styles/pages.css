@@ -584,8 +584,11 @@
   min-height: calc(100vh - 90px);
   padding: 20px clamp(20px, 3.5vw, 54px) 54px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .swap-ticker {
+  flex: 0 0 auto;
   width: 100%;
   overflow: hidden;
   padding: 0 0 5px;

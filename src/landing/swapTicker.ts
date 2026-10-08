@@ -88,6 +88,21 @@ export function initSwapTicker() {
         });
       }
 
+      // Last-known markets survive a CoinGecko rate-limit / outage.
+      function applyCachedMarkets() {
+        try {
+          var cached = JSON.parse(localStorage.getItem('hedgora.ticker') || 'null');
+          if (!Array.isArray(cached) || !cached.length) return false;
+          markets = cached;
+          marketById = Object.create(null);
+          markets.forEach(function (market) { marketById[market.id] = market; });
+          renderMarkets();
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
       async function refreshMarkets() {
         try {
           var url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h';
@@ -100,13 +115,18 @@ export function initSwapTicker() {
           markets.forEach(function (market) { marketById[market.id] = market; });
           renderMarkets();
           track.removeAttribute('data-error');
+          try { localStorage.setItem('hedgora.ticker', JSON.stringify(markets)); } catch (e) { /* ignore */ }
         } catch (error) {
-          track.dataset.error = 'true';
-          if (!markets.length) track.textContent = 'Market data is temporarily unavailable.';
+          if (!markets.length) applyCachedMarkets();
+          if (!markets.length) {
+            track.dataset.error = 'true';
+            track.textContent = 'Market data is temporarily unavailable.';
+          }
           console.error('Could not load CoinGecko top markets.', error);
         }
       }
 
+      applyCachedMarkets(); // show last-known instantly, before the first fetch
       refreshMarkets();
       window.setInterval(refreshMarkets, 60000);
 

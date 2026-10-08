@@ -1,16 +1,41 @@
 /* Redesigned swap box (matches the reference mockup). */
 .swapbox {
+  position: relative;
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid #2d2932;
   border-radius: 24px;
   padding: 18px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28);
+  background:
+    radial-gradient(circle at 86% 0%, rgba(232, 227, 213, 0.095), transparent 36%),
+    linear-gradient(150deg, #201827, #131117 72%);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.19);
 }
+
+/* Animated gradient border — brighter running sheen */
+.swapbox::after,
+.swap-history-box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(110deg, rgba(150, 150, 185, 0.35) 0%, rgba(96, 138, 230, 0.9) 30%, rgba(210, 232, 255, 1) 50%, rgba(232, 227, 213, 0.85) 70%, rgba(150, 150, 185, 0.35) 100%);
+  background-size: 220% 100%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.95;
+  animation: page-border-sheen 5s linear infinite;
+}
+.swapbox > *,
+.swap-history-box > * { position: relative; z-index: 1; }
 
 /* Inset field cards (pay / receive) */
 .swapfield {
@@ -307,18 +332,24 @@
   .swapbox__chains { width: 100%; }
 }
 
-/* Layout: flow tracker + swap box */
+/* Layout: swap box + history box */
 .swap-layout {
+  flex: 1 1 auto;
   display: flex;
-  gap: 36px;
-  align-items: flex-start;
+  gap: 24px;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .swap-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 0 1 480px;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 480px;
+}
+.swap-side {
+  flex: 1 1 320px;
+  width: 100%;
+  max-width: 380px;
 }
 
 /* Note / status lines */
@@ -401,31 +432,50 @@
   font-weight: 600;
 }
 
-/* Swap history */
-.swap-history {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 480px;
+/* Swap history box */
+.swap-history-box {
+  position: relative;
+  border: 1px solid #2d2932;
+  border-radius: 24px;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 86% 0%, rgba(232, 227, 213, 0.095), transparent 36%),
+    linear-gradient(150deg, #201827, #131117 72%);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.19);
 }
-.swap-history h3 {
-  font-size: 0.9rem;
+.swap-history-box > h3 {
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--color-text-secondary);
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 .swap-history__row {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 9px 0;
+  padding: 11px 0;
   border-top: 1px solid var(--color-border);
-  font-size: 0.85rem;
+  font-size: 0.86rem;
 }
-.swap-history__row a { color: var(--color-accent-hover); text-decoration: none; }
+.swap-history__row:first-child { border-top: none; }
+.swap-history__pair { display: flex; align-items: center; gap: 7px; }
+.swap-history__arrow { color: var(--color-text-muted); }
+.swap-history__row a { color: var(--color-accent-hover); text-decoration: none; white-space: nowrap; }
+.swap-history__row a:hover { text-decoration: underline; }
+
+.swap-history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  padding: 30px 10px;
+}
+.swap-history-empty .empty-orb { margin-bottom: 4px; }
+.swap-history-empty strong { font-weight: 600; }
+.swap-history-empty p { color: var(--color-text-secondary); font-size: 0.85rem; }
 
 @media (max-width: 920px) {
   .swap-layout { flex-direction: column; align-items: center; }
-  .swapflow { width: 100%; max-width: 480px; }
-  .swapflow { flex-direction: row; flex-wrap: wrap; gap: 6px 16px; }
-  .swapflow__step:not(:last-child)::after { display: none; }
+  .swap-side { max-width: 480px; }
 }

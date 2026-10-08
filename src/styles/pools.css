@@ -38,7 +38,11 @@
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 .pools-tab:hover { color: var(--color-text-primary); }
-.pools-tab.is-active { background: var(--color-surface-hover); color: var(--color-text-primary); }
+.pools-tab.is-active {
+  background: var(--color-accent-hover);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(11, 83, 191, 0.38);
+}
 
 .pools-toolbar__right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .pools-search {
@@ -182,3 +186,24 @@
   cursor: pointer;
 }
 .modal__close:hover { color: var(--color-text-primary); background: var(--color-surface-hover); }
+
+/* Remove-liquidity tab + modal */
+.addbtn--remove { border-color: rgba(229, 72, 77, 0.55); color: #ff9ea1; }
+.addbtn--remove:hover { border-color: var(--color-danger); background: rgba(229, 72, 77, 0.1); }
+
+.remove-pair { display: flex; align-items: center; gap: 12px; margin: 6px 0 2px; }
+.remove-pair b { font-size: 1.05rem; font-weight: 600; }
+
+.remove-pct-val { color: var(--color-accent-hover); font-weight: 700; }
+.remove-pcts { display: flex; gap: 8px; margin-top: 4px; }
+.remove-pcts .swapbox__pct { flex: 1; text-align: center; }
+.swapbox__pct.is-on {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #fff;
+}
+
+.remove-out { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.remove-out__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 0.9rem; }
+.remove-out__row span { color: var(--color-text-secondary); }
+.remove-out__row b { font-weight: 600; }
