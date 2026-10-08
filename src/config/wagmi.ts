@@ -1,5 +1,5 @@
 import { getDefaultConfig, type Chain } from '@rainbow-me/rainbowkit';
-import { sepolia } from 'wagmi/chains';
+import { sepolia, baseSepolia } from 'wagmi/chains';
 
 /**
  * Arc Testnet — the network Hedgora targets.
@@ -66,7 +66,7 @@ export const robinhoodTestnet = {
  */
 export const config = getDefaultConfig({
   appName: 'Hedgora',
-  projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID ?? 'YOUR_PROJECT_ID',
-  chains: [arcTestnet, robinhoodTestnet, sepolia],
+  projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || 'YOUR_PROJECT_ID',
+  chains: [arcTestnet, robinhoodTestnet, sepolia, baseSepolia],
   ssr: false,
 });

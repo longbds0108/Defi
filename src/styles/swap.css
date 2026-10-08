@@ -155,6 +155,8 @@
   background: transparent;
   padding-left: 16px;
 }
+.swapbox__token--static { cursor: default; }
+.swapbox__token--static:hover { border-color: var(--color-border); }
 .swapbox__chev { color: var(--color-text-secondary); font-size: 0.7rem; margin-left: 2px; }
 
 .swapbox__balance {
